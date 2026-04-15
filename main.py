@@ -52,9 +52,9 @@ def room1():
             scroll_text("You seek the Wisdom of the Old Sage and gain great insight.")
 
 def game_init():
-    scroll_text("The Quest of the Last DOOM")
+    scroll_text("Fate: The Crimson Isle")
     time.sleep(2)
-    scroll_text("You are the last dragon knight, tasked with protecting the realm from evil forces.")
+    scroll_text("You are the explorer, tasked with exploring the single island called the Crimson Isle.")
     time.sleep(2)
     clear_screen()
 
