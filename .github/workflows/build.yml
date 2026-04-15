@@ -17,6 +17,8 @@ jobs:
         with:
           python-version: '3.14'
 
+      - run: pip install -r requirements.txt
+
       - name: Compile with Nuitka
         uses: Nuitka/Nuitka-Action@main
         with:
@@ -24,7 +26,7 @@ jobs:
           script-name: main.py
           mode: app
           include-package: rich
-          
+
       - name: Uploading artifact
         uses: actions/upload-artifact@v7
         with:
