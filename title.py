@@ -1,5 +1,4 @@
 import turtle
-import time
 
 # Title screen
 screen = turtle.Screen()

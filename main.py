@@ -5,6 +5,8 @@ import shutil
 import turtle
 import rich.prompt as prompt
 
+import title
+
 def scroll_text(text):
     for char in text:
         sys.stdout.write(char)
@@ -57,5 +59,4 @@ def game_init():
     clear_screen()
 
 if __name__ == "__main__":
-    subprocess.call("python3 title.py", shell=True, timeout=None)
     game_init()
