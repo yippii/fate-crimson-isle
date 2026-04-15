@@ -24,7 +24,7 @@ jobs:
         with:
           nuitka-version: main
           script-name: main.py
-          mode: app
+          mode: standalone
           include-package: rich
 
       - name: Uploading artifact
