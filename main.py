@@ -60,3 +60,4 @@ def game_init():
 
 if __name__ == "__main__":
     game_init()
+    room1()
