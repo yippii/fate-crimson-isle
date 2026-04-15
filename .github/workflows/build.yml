@@ -3,7 +3,11 @@ on: [push]
 
 jobs:
   build:
-    runs-on: windows-latest
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
     steps:
       - name: Github Checkout
         uses: actions/checkout@v6
@@ -23,5 +27,5 @@ jobs:
       - name: Uploading artifact
         uses: actions/upload-artifact@v7
         with:
-          name: build-output
-          path: build\*\*.exe
+          name: build-output - ${{matrix.os}}
+          path: build\*.dist\
