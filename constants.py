@@ -4,7 +4,13 @@ ph = "Perfect Hit!"
 s1 = "-1 Stamina."
 s2 = "-2 Stamina."
 no_s = "No Stamina Lost."
-blocker = "--------------------"
+sw1 = "You used a sword!."
+no_sw = "Your sword remains strong!"
+a1 = "You used an arrow!"
+tno = "That is not an option!"
+wyd = "What do you do?\n: "
+nowe = "You do not have this weapon!"
+blocker = 15*"-"
 
 mapData = [ 400, "r",
             80, "r",
