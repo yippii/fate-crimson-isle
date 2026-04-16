@@ -32,7 +32,40 @@ KILL_GOBLIN_BOW_DESC = "Kill goblin with bow (-3 stamina)"
 KILL_GOBLIN_CROSSBOW_DESC = "Kill goblin with crossbow (-4 stamina)"
 STAMINA_POTION_DESC = "Stamina potion (+25 stamina)"
 
-mapData = [ 400, "r",
+mapData = [
+    # Outer rectangle
+    400, "r",
+    200, "r",
+    400, "r",
+    200, "r",
+
+    # Move inside (left corridor entrance)
+    50, "l",
+    150, "l",
+
+    # Inner rectangle (hallway loop)
+    300, "r",
+    100, "r",
+    300, "r",
+    100, "r",
+
+    # Small room branch (top middle)
+    100, "l",
+    50, "l",
+    100, "r",
+    50, "r",
+
+    # Continue hallway
+    200, "r",
+
+    # Right side branch
+    100, "l",
+    50, "l",
+    100, "r",
+    50, "r"
+]
+
+l2map = [ 400, "r",
             80, "r",
             50, "l",
             200, "l",

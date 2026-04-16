@@ -52,6 +52,7 @@ def title_screen():
         continueOnTerminal()
         game_init()
         drawMap()
+        #level2()
         room1()
 
     screen.onclick(start_game)
@@ -72,6 +73,54 @@ def continueOnTerminal():
     screen.update()
 
 def drawMap():
+    methods.clear_gui(screen)
+    pen = turtle.Turtle()
+    pen.pensize(5)
+    pen.hideturtle()
+    pen.speed(100000)
+    pen.penup()
+    pen.color("white")
+    pen.goto(-200, 180)
+    pen.pendown()
+
+    # map
+    for i in range(len(constants.mapData)):
+        if i % 2 == 0:
+            pen.forward(constants.mapData[i])
+        else:
+            if constants.mapData[i] == "l":
+                pen.left(90)
+            elif constants.mapData[i] == "r":
+                pen.right(90)
+
+    pen.goto(-200, 180)
+    screen.update()
+
+def level2():
+    methods.clear_gui(screen)
+    pen = turtle.Turtle()
+    pen.pensize(5)
+    pen.hideturtle()
+    pen.speed(100000)
+    pen.penup()
+    pen.color("white")
+    pen.goto(-200, 180)
+    pen.pendown()
+
+    # map
+    for i in range(len(constants.l2map)):
+        if i % 2 == 0:
+            pen.forward(constants.l2map[i])
+        else:
+            if constants.l2map[i] == "l":
+                pen.left(90)
+            else:
+                pen.right(90)
+
+    pen.goto(-200, 180)
+    screen.update()
+
+def level3():
     methods.clear_gui(screen)
     pen = turtle.Turtle()
     pen.pensize(5)
