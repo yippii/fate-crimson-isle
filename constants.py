@@ -44,7 +44,7 @@ KILL_GOBLIN_CROSSBOW_DESC = "Kill goblin with crossbow (-4 stamina)"
 STAMINA_POTION_DESC = "Stamina potion (+25 stamina)"
 
 mapData = [
-    # Outer rectangle (smaller)
+    # Outer rectangle 
     200, "r",
     150, "r",
     200, "r",
@@ -88,4 +88,4 @@ l2map = [ 400, "r",
             50, "l",
             100, "l",
             50, "r"
-          ]
+                            ]
