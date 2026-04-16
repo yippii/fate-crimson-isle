@@ -61,8 +61,8 @@ def title_screen():
 def continueOnTerminal():
     methods.clear_gui(screen)
     # draw title
-    title.goto(0, 80)
-    title.write("fate", align="center", font=("courier", 48, "bold"))
+    title.goto(0, 0)
+    title.write("Fate", align="center", font=("courier", 48, "bold"))
 
     title.goto(0, 30)
     title.write("the crimson isle", align="center", font=("courier", 24, "normal"))
@@ -174,7 +174,7 @@ def room1():
             methods.scroll_text("you seek the wisdom of the old sage and gain great insight.")
 
 def game_init():
-    methods.scroll_text("\033[1;31mfate: the crimson isle\033[0;0m\n")
+    methods.scroll_text("\033[1;31mFate: the crimson isle\033[0;0m\n")
     time.sleep(2)
     methods.scroll_text("you are the explorer, tasked with exploring the single island called the crimson isle.")
     time.sleep(2)
