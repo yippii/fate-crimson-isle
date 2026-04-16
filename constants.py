@@ -40,29 +40,29 @@ mapData = [
     200, "r",
 
     # Move inside (left corridor entrance)
-    50, "l",
+    25, "l",
     150, "l",
 
     # Inner rectangle (hallway loop)
-    300, "r",
-    100, "r",
-    300, "r",
-    100, "r",
-
-    # Small room branch (top middle)
-    100, "l",
-    50, "l",
-    100, "r",
+    150, "r",
+    50, "r",
+    150, "r",
     50, "r",
 
+    # Small room branch (top middle)
+    50, "l",
+    25, "l",
+    50, "r",
+    25, "r",
+
     # Continue hallway
-    200, "r",
+    100, "r",
 
     # Right side branch
-    100, "l",
     50, "l",
-    100, "r",
-    50, "r"
+    25, "l",
+    50, "r",
+    25, "r"
 ]
 
 l2map = [ 400, "r",
