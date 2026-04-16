@@ -68,6 +68,7 @@ def battle_fight():
         elif choice == 3:
             # TODO: Add crossbow
             # crossbow_fighting(stamina, have_crossbow)
+            battle_menu()
         elif choice == 5:
             battle_menu()
 
@@ -210,13 +211,3 @@ def battle_flee_action():
     print("You have fled the battle.")
     print("-5 stamina")
     values.stamina -= 5
-
-# while battle == True:
-#     weapon_checker()
-#     found_monster_actions()
-#     if battle_action == 1:
-#         battle_attack_action()
-#     elif battle_action == 2:
-#         battle_inventory_action()
-#     elif battle_action == 3:
-#         battle_flee_action()
