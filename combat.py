@@ -1,44 +1,38 @@
 import random as r
-
-m = "Miss!"
-h = "Hit!"
-ph = "Perfect Hit!"
-s1 = "-1 Stamina."
-s2 = "-2 Stamina."
-no_s = "No Stamina Lost."
-blocker = "--------------------"
-
+import constants
 
 def sword_fighting():
     global sword_amount
     if sword_amount >= 1:
         while battle == True:
             global stamina
-            print(blocker)
+            sword_battle_roll = r.randint(1, 6)
+
+            print(constants.blocker)
             print("You use your sword!")
-            sword_battle_roll = r.randint(1,6)
+
             if sword_battle_roll <= 3:
-                print(m)
+                print(constants.m)
                 miss_stamina_loss = r.randint(1,2)
                 if miss_stamina_loss == 1:
-                    print(s1)
+                    print(constants.s1)
                     stamina = stamina - 1
                 else:
-                    print(no_s)
+                    print(constants.no_s)
                 return
             elif sword_battle_roll <= 5:
-                print(h)
-                print(s1)
+                print(constants.h)
+                print(constants.s1)
                 stamina = stamina - 1
                 sword_amount = sword_amount - 1
                 return
             else:                    
-                print(ph)
-                print(no_s)
+                print(constants.ph)
+                print(constants.no_s)
                 sword_amount = sword_amount - 1
                 return
     else:
-        print(blocker)
+        print(constants.blocker)
         print("You do not have any more swords.")
         return
 
