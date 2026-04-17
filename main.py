@@ -103,8 +103,6 @@ def drawMapL1():
 
 # def drawMap2():
 
-
-
 #     map_str = """
 # +----------+             +-----------+
 # | L3       |             |           |
@@ -221,18 +219,13 @@ def room1():
 
     match choice:
         case "1":
-            methods.clear_screen()
-            methods.scroll_text("you venture into the dark forest, where you encounter a fierce dragon.")
-            combat.battle_menu()
-            time.sleep(2)
-            methods.scroll_text("you engage in a fierce battle and emerge victorious, earning the respect of the dragon.")
+            hm()
         case "2":
             methods.clear_screen()
             methods.scroll_text("you explore the ancient ruins and discover a hidden treasure.")
         case "3":
             methods.clear_screen()
             methods.scroll_text("you seek the wisdom of the old sage and gain great insight.")
-
 
 def room2():
     drawMapL2()
@@ -295,6 +288,13 @@ def room3():
             methods.clear_screen()
             methods.scroll_text("you seek the wisdom of the old sage and gain great insight.")
 
+
+def hm():
+    methods.clear_screen()
+    methods.scroll_text("you enter into the mess hall, where you encounter a fierce dragon.")
+    combat.battle_menu()
+    time.sleep(2)
+    methods.scroll_text("you engage in a fierce battle and emerge victorious, earning the respect of the dragon.")
 
 def game_init():
     methods.scroll_text("\033[1;31mFate: the crimson isle\033[0;0m\n")
