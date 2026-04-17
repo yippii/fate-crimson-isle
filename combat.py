@@ -2,8 +2,10 @@ import random as r
 import methods
 import constants
 import values
+import time
 
 monster = "Goblin"
+
 
 #This function controls the basic combat, allowing the user to choose their actions, and returns it as a number
 def battle_menu():
@@ -19,11 +21,11 @@ def battle_menu():
         ]
     )
 
-    if choice == 1:
+    if choice == "1":
         battle_fight()
-    elif choice == 2:
+    elif choice == "2":
         battle_inventory_action()
-    elif choice == 3:
+    elif choice == "3":
         battle_flee_action()
 
 
@@ -45,39 +47,42 @@ def weapon_checker():
 
 #This function controls which attack function is called based on the user's choice
 def battle_fight():
-    while True:
-        print(constants.blocker)
-        print("Attack")
-        print(constants.blocker)
+    weapon_checker()
 
-        choice = methods.ask_fixed_bottom(
-            constants.wyd,
-            ["1", "2", "3", "5"],
-            [
-                " 1 - " + values.weapon1,
-                "\n 2 - " + values.weapon2,
-                "\n 3 - " + values.weapon3,
-                "\n 5 - Back"
-            ]
-        )
+    print(constants.blocker)
+    print("Attack")
+    print(constants.blocker)
 
-        if choice == 1:
-            sword_fighting()
-        elif choice == 2:
-            bow_fighting()
-        elif choice == 3:
-            # TODO: Add crossbow
-            # crossbow_fighting(stamina, have_crossbow)
-            battle_menu()
-        elif choice == 5:
-            battle_menu()
+    choice = methods.ask_fixed_bottom(
+        constants.wyd,
+        ["1", "2", "3", "5"],
+        [
+            " 1 - " + values.weapon1,
+            "\n 2 - " + values.weapon2,
+            "\n 3 - " + values.weapon3,
+            "\n 5 - Back"
+        ]
+    )
+
+    if choice == "1":
+        sword_fighting()
+    elif choice == "2":
+        bow_fighting()
+    elif choice == "3":
+        # TODO: Add crossbow
+        # crossbow_fighting(stamina, have_crossbow)
+        battle_menu()
+    elif choice == "5":
+        battle_menu()
 
 
 #This function controls the sword fighting process, using swords and stamina
 def sword_fighting():
+
     if values.sword_amount >= 1:
         print(constants.blocker)
         print("You use your sword!")
+        time.sleep(0.5)
 
         sword_battle_roll = r.randint(1,6)
 
@@ -100,6 +105,8 @@ def sword_fighting():
             print(constants.sword_sword_wear1)
             values.stamina -= 1
             values.sword_amount -= 1
+            print(values.win_message)
+            return
 
         # Perfect hit
         else:
@@ -107,7 +114,8 @@ def sword_fighting():
             print(constants.stamina_lost0)
             print(constants.sword_sword_wear1)
             values.sword_amount -= 1
-
+            print(values.win_message)
+            return
     else:
         print(constants.blocker)
         print(constants.no_weapon)

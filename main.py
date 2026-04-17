@@ -1,5 +1,7 @@
 import time
 import turtle
+
+import combat
 import methods
 import constants
 import values
@@ -8,7 +10,7 @@ import values
 screen = turtle.Screen()
 screen.setup(width=800, height=600)
 screen.bgcolor("black")
-screen.title("fate: the crimson isle")
+screen.title("Fate: the crimson isle")
 screen.setup(width=600, height=400, startx=-1, starty=0)
 screen.cv._rootwindow.attributes("-topmost", True)
 screen.cv._rootwindow.resizable(False, False)
@@ -20,6 +22,7 @@ title.hideturtle()
 title.speed(0)
 title.penup()
 title.color("crimson")
+
 
 def title_screen():
     # draw title
@@ -52,12 +55,13 @@ def title_screen():
     def start_game(x, y):
         continueOnTerminal()
         game_init()
-        drawMap1()
+        drawMapL1()
         #level2()
         room1()
 
     screen.onclick(start_game)
     turtle.done()
+
 
 def continueOnTerminal():
     methods.clear_gui(screen)
@@ -73,7 +77,7 @@ def continueOnTerminal():
     title.write("continue on terminal", align="center", font=("arial", 14, "italic"))
     screen.update()
 
-def drawMap1():
+def drawMapL1():
     methods.clear_gui(screen)
 
     map_str = """
@@ -193,7 +197,8 @@ def parse_map(map_str, cell_size=20):
 
     screen.update()
 
-def level2():
+
+def drawMapL2():
     methods.clear_gui(screen)
     pen = turtle.Turtle()
     pen.pensize(5)
@@ -217,7 +222,8 @@ def level2():
     pen.goto(-200, 180)
     screen.update()
 
-def level3():
+
+def drawMapL3():
     methods.clear_gui(screen)
     pen = turtle.Turtle()
     pen.pensize(5)
@@ -241,7 +247,41 @@ def level3():
     pen.goto(-200, 180)
     screen.update()
 
+
 def room1():
+    drawMapL1()
+    knight = turtle.Turtle()
+    methods.setup_knight(knight)
+    knight.goto(150, 140)
+
+    choice = methods.ask_fixed_bottom(
+        "what will you do?",
+        ["1", "2", "3"],
+        [
+            "you have three options",
+            "1. venture into the dark forest",
+            "2. explore the ancient ruins",
+            "3. seek the wisdom of the old sage",
+        ],
+    )
+
+    match choice:
+        case "1":
+            methods.clear_screen()
+            methods.scroll_text("you venture into the dark forest, where you encounter a fierce dragon.")
+            combat.battle_menu()
+            time.sleep(2)
+            methods.scroll_text("you engage in a fierce battle and emerge victorious, earning the respect of the dragon.")
+        case "2":
+            methods.clear_screen()
+            methods.scroll_text("you explore the ancient ruins and discover a hidden treasure.")
+        case "3":
+            methods.clear_screen()
+            methods.scroll_text("you seek the wisdom of the old sage and gain great insight.")
+
+
+def room2():
+    drawMapL2()
     knight = turtle.Turtle()
     methods.setup_knight(knight)
     knight.goto(150, 140)
@@ -270,12 +310,45 @@ def room1():
             methods.clear_screen()
             methods.scroll_text("you seek the wisdom of the old sage and gain great insight.")
 
+
+def room3():
+    drawMapL3()
+    knight = turtle.Turtle()
+    methods.setup_knight(knight)
+    knight.goto(150, 140)
+
+    choice = methods.ask_fixed_bottom(
+        "what will you do?",
+        ["1", "2", "3"],
+        [
+            "you have three options",
+            "1. venture into the dark forest",
+            "2. explore the ancient ruins",
+            "3. seek the wisdom of the old sage",
+        ],
+    )
+
+    match choice:
+        case "1":
+            methods.clear_screen()
+            methods.scroll_text("you venture into the dark forest, where you encounter a fierce dragon.")
+            time.sleep(2)
+            methods.scroll_text("you engage in a fierce battle and emerge victorious, earning the respect of the dragon.")
+        case "2":
+            methods.clear_screen()
+            methods.scroll_text("you explore the ancient ruins and discover a hidden treasure.")
+        case "3":
+            methods.clear_screen()
+            methods.scroll_text("you seek the wisdom of the old sage and gain great insight.")
+
+
 def game_init():
     methods.scroll_text("\033[1;31mFate: the crimson isle\033[0;0m\n")
     time.sleep(2)
     methods.scroll_text("you are the explorer, tasked with exploring the single island called the crimson isle.")
     time.sleep(2)
     methods.clear_screen()
+
 
 if __name__ == "__main__":
     title_screen()
