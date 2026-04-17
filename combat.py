@@ -208,18 +208,24 @@ def battle_inventory():
           ]
     )
 
-    if choice == 1:
+    if choice == "1":
         potion()
-    elif choice == 2:
+    elif choice == "2":
         print(constants.blocker)
         print("You have " + str(values.sword_amount) + " swords.")
-    elif choice == 3:
+        time.sleep(0.5)
+        battle_inventory()
+    elif choice == "3":
         print(constants.blocker)
         print("You have " + str(values.arrow_amount) + " arrows.")
-    elif choice == 4:
+        time.sleep(0.5)
+        battle_inventory()
+    elif choice == "4":
         print(constants.blocker)
         print("You have " + str(values.keys_amount) + " keys")
-    elif choice == 5:
+        time.sleep(0.5)
+        battle_inventory()
+    elif choice == "5":
         battle_menu()
 
 # Initiated from battle_inventory_action()
@@ -238,7 +244,7 @@ def potion():
         ]
     )
 
-    if choice == 1:
+    if choice == "1":
         if values.potion_num >= 1:
             print(constants.blocker)
             print("You used a stamina potion!")
