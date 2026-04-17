@@ -18,14 +18,6 @@ no_weapon = "You do not have this weapon!"
 
 blocker = 15*"-"
 
-# Stamina system
-MAX_STAMINA = 100
-STARTING_STAMINA = 50
-
-# Amounts of initial items in inventory
-SWORD_AMOUNT = 5
-ARROW_AMOUNT = 5
-
 # Actions (stamina costs)
 PICKUP_COIN_COST = -1
 ENTER_ROOM_COST = -5
@@ -34,7 +26,7 @@ KILL_GOBLIN_BOW_COST = -3
 KILL_GOBLIN_CROSSBOW_COST = -4
 
 # Rewards
-STAMINA_POTION_GAIN = +25
+STAMINA_POTION_GAIN = 25
 
 PICKUP_COIN_DESC = "Pick up coin (-1 stamina)"
 ENTER_ROOM_DESC = "Enter room (-5 stamina)"
@@ -43,7 +35,7 @@ KILL_GOBLIN_BOW_DESC = "Kill goblin with bow (-3 stamina)"
 KILL_GOBLIN_CROSSBOW_DESC = "Kill goblin with crossbow (-4 stamina)"
 STAMINA_POTION_DESC = "Stamina potion (+25 stamina)"
 
-mapData = [
+old_mapData = [
     # Outer rectangle 
     100, "r",
     75, "r",
@@ -77,7 +69,7 @@ mapData = [
     70, "r",
 ]
 
-l2map = [ 400, "r",
+old_l2map = [ 400, "r",
             80, "r",
             50, "l",
             200, "l",

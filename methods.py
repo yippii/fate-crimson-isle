@@ -22,7 +22,7 @@ def clear_gui(screen):
 
 def ask_fixed_bottom(question, choices, lines_above):
     height = shutil.get_terminal_size().lines
-    blank_lines = max(0, height - len(lines_above) - 2)
+    blank_lines = max(0, height - len(lines_above) - 10)
     for line in lines_above:
         scroll_text(line)
     print("\n" * blank_lines, end='')
