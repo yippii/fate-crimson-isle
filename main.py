@@ -30,12 +30,12 @@ def title_screen():
     title.write("Fate", align="center", font=("courier", 48, "bold"))
 
     title.goto(0, 30)
-    title.write("the crimson isle", align="center", font=("courier", 24, "normal"))
+    title.write("The Crimson Isle:", align="center", font=("courier", 24, "normal"))
 
     # subtitle
     title.color("white")
     title.goto(0, -40)
-    title.write("a terminal roguelike adventure", align="center", font=("arial", 14, "italic"))
+    title.write("A terminal roguelike adventure", align="center", font=("arial", 14, "italic"))
 
     # start instruction
     title.goto(0, -100)
@@ -55,8 +55,6 @@ def title_screen():
     def start_game(x, y):
         continueOnTerminal()
         game_init()
-        drawMapL1()
-        #level2()
         room1()
 
     screen.onclick(start_game)
@@ -91,8 +89,8 @@ def drawMapL1():
 +----+    +  --------------+      |
 |         |            S   |      |
 |    |    |   P     +------+      |
-+----+    +---------+      |      |
-|         |         |      |      |
++----+    +---------+      |      +-------+
+|         |         |      |      |   z   |
 |    |    |    MH   |      |      +-------+
 +----+----+  --------------+      |       |
 |                                         |
@@ -103,31 +101,31 @@ def drawMapL1():
 """
     parse_map(map_str, cell_size=18)
 
-def drawMap2():
-    methods.clear_gui(screen)
+# def drawMap2():
+#     methods.clear_gui(screen)
 
-    map_str = """
-+----------+             +-----------+
-| L3       |             |           |
-|          |             |           |
-|          |             |           |
-|          +-------------+           |
-|                                    |
-+----+   +--------------- +          |
-     |             |      |          |
-     +---+         +------+          |
-         +---------+      |          |
-         |                |          |
-         |                |          +---+
-+--------------------   --+              |
-|                                        |
-|                                +-------+
-|                                |
-+-------------------+   ---------+
-                    |            |
-                    +------------+
-"""
-    parse_map(map_str, cell_size=18)
+#     map_str = """
+# +----------+             +-----------+
+# | L3       |             |           |
+# |          |             |           |
+# |          |             |           |
+# |          +-------------+           |
+# |                                    |
+# +----+   +--------------- +          |
+#      |             |      |          |
+#      +---+         +------+          |
+#          +---------+      |          |
+#          |                |          |
+#          |                |          +---+
+# +--------------------   --+              |
+# |                                        |
+# |                                +-------+
+# |                                |
+# +-------------------+   ---------+
+#                     |            |
+#                     +------------+
+# """
+#     parse_map(map_str, cell_size=18)
 
 def parse_map(map_str, cell_size=20):
     lines = map_str.strip('\n').split('\n')
@@ -197,71 +195,26 @@ def parse_map(map_str, cell_size=20):
 
     screen.update()
 
-
-def drawMapL2():
-    methods.clear_gui(screen)
-    pen = turtle.Turtle()
-    pen.pensize(5)
-    pen.hideturtle()
-    pen.speed(100000)
-    pen.penup()
-    pen.color("white")
-    pen.goto(-200, 180)
-    pen.pendown()
-
-    # map
-    for i in range(len(constants.l2map)):
-        if i % 2 == 0:
-            pen.forward(constants.l2map[i])
-        else:
-            if constants.l2map[i] == "l":
-                pen.left(90)
-            else:
-                pen.right(90)
-
-    pen.goto(-200, 180)
-    screen.update()
-
-
-def drawMapL3():
-    methods.clear_gui(screen)
-    pen = turtle.Turtle()
-    pen.pensize(5)
-    pen.hideturtle()
-    pen.speed(100000)
-    pen.penup()
-    pen.color("white")
-    pen.goto(-200, 180)
-    pen.pendown()
-
-    # map
-    for i in range(len(constants.mapData)):
-        if i % 2 == 0:
-            pen.forward(constants.mapData[i])
-        else:
-            if constants.mapData[i] == "l":
-                pen.left(90)
-            else:
-                pen.right(90)
-
-    pen.goto(-200, 180)
-    screen.update()
-
-
+    
 def room1():
     drawMapL1()
     knight = turtle.Turtle()
     methods.setup_knight(knight)
-    knight.goto(150, 140)
+    knight.goto(105, 98)
+
+    methods.scroll_text("As you enter the dark hall, you hear chattering from all around you.")
+    time.sleep(1.5)
+    methods.scroll_text("")
+
 
     choice = methods.ask_fixed_bottom(
         "what will you do?",
         ["1", "2", "3"],
         [
             "you have three options",
-            "1. venture into the dark forest",
-            "2. explore the ancient ruins",
-            "3. seek the wisdom of the old sage",
+            "1. Enter the left room",
+            "2. Enter the right room",
+            "3. Continue exploring",
         ],
     )
 
@@ -345,8 +298,36 @@ def room3():
 def game_init():
     methods.scroll_text("\033[1;31mFate: the crimson isle\033[0;0m\n")
     time.sleep(2)
-    methods.scroll_text("you are the explorer, tasked with exploring the single island called the crimson isle.")
+    methods.scroll_text("You are a level 1 adventurer working for King Lebron inc., tasked with exploring the mysterious island, the Crimson Isle.")
     time.sleep(2)
+    methods.scroll_text("You land amidst the crashing waves, peering back at the approaching vessel. It carries a team of experienced adventurers, the ones that you are meant to shadow on this expedition.")
+    time.sleep(2)
+    methods.scroll_text("However, you don't want to wait for them, so you run off to start exploring.")
+    time.sleep(2)
+    methods.scroll_text("Two")
+    time.sleep(0.5)
+    methods.scroll_text("Hours")
+    time.sleep(0.5)
+    methods.scroll_text("Later...")
+    time.sleep(2)
+    methods.scroll_text("Returning to the shore, you reach your team's camp.")
+    time.sleep(2)
+    methods.scroll_text("You enter your boss' tent, and start to regale them with your tales of glory from the past two hours.")
+    time.sleep(2)
+    methods.scroll_text("After a few moments, you notice that they have not responded, nor have they moved from their position on the cot.")
+    time.sleep(2)
+    methods.scroll_text("You walk up to them, and put your hand on their shoulder...")
+    time.sleep(0.5)
+    methods.scroll_text("...")
+    time.sleep(1.5)
+    methods.scroll_text("They fall dead at your feet.")
+    time.sleep(2)
+    methods.scroll_text("Returning outside, you know that the rest of your team has suffered the same fate.")                        
+    methods.scroll_text("Consumed with a desire for revenge, you know that you must avenge them.")
+    methods.scroll_text("Grabbing their swords, you leave the camp to begin your journey.")
+    methods.scroll_text("Looking up, you see a forbidding castle high up on a towering mountain, glowing with crimson light.")
+    methods.scroll_text("You know where you must go.")
+    time.sleep(1.5)
     methods.clear_screen()
 
 
