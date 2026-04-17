@@ -7,10 +7,11 @@ import time
 monster = "Goblin"
 
 
-#This function controls the basic combat, allowing the user to choose their actions, and returns it as a number
+# Battle main menu, called from main during enemy rooms
 def battle_menu():
+    methods.clear_screen()
     print(constants.blocker)
-    print("You stumble upon a " + monster + "!")
+    methods.scroll_text("You stumble upon a " + monster + "!")
     choice = methods.ask_fixed_bottom(
         constants.wyd,
         ["1", "2", "3"],
@@ -24,12 +25,28 @@ def battle_menu():
     if choice == "1":
         battle_fight()
     elif choice == "2":
-        battle_inventory_action()
+        battle_inventory()
     elif choice == "3":
-        battle_flee_action()
+        battle_flee()
 
 
-#This weapon checks if weapons have been discovered. If discovered, it shares their name
+# Post-battle report, initiated from sword_fighting() and bow_fighting()
+def battle_ending(mode, missed):
+    # Sword
+    if mode == 1:
+        if not missed:
+            print(f"Stamina left: {values.stamina}\nSword left: {values.sword_amount}")
+            time.sleep(0.5)
+        else:
+            print(f"Stamina left: {values.stamina}")
+            time.sleep(0.5)
+    # Bow
+    elif mode == 2:
+        print(f"Stamina left: {values.stamina}\nArrows left: {values.arrow_amount}")
+        time.sleep(0.5)
+
+
+# Check if weapon is owned, if not, make it "???"
 def weapon_checker():
     if values.have_sword:
         values.weapon1 = "Sword"
@@ -45,13 +62,16 @@ def weapon_checker():
         values.weapon3 = "???"
 
 
-#This function controls which attack function is called based on the user's choice
+# Fight menu, initiated from battle_menu()
 def battle_fight():
     weapon_checker()
+
+    methods.clear_screen()
 
     print(constants.blocker)
     print("Attack")
     print(constants.blocker)
+    print()
 
     choice = methods.ask_fixed_bottom(
         constants.wyd,
@@ -76,12 +96,12 @@ def battle_fight():
         battle_menu()
 
 
-#This function controls the sword fighting process, using swords and stamina
+# Sword fighting, initiated from battle_fight()
 def sword_fighting():
-
+    methods.clear_screen()
     if values.sword_amount >= 1:
         print(constants.blocker)
-        print("You use your sword!")
+        print("You used your sword!")
         time.sleep(0.5)
 
         sword_battle_roll = r.randint(1,6)
@@ -94,9 +114,12 @@ def sword_fighting():
                 print(constants.stamina_lost1)
                 print(constants.sword_no_sword_wear)
                 values.stamina -= 1
+                battle_ending(1, True)
+                battle_fight()
             else:
                 print(constants.stamina_lost0)
                 print(constants.sword_no_sword_wear)
+                battle_fight()
 
         # Great hit
         elif sword_battle_roll <= 4:
@@ -105,7 +128,7 @@ def sword_fighting():
             print(constants.sword_sword_wear1)
             values.stamina -= 1
             values.sword_amount -= 1
-            print(values.win_message)
+            battle_ending(1, False)
             return
 
         # Perfect hit
@@ -114,19 +137,24 @@ def sword_fighting():
             print(constants.stamina_lost0)
             print(constants.sword_sword_wear1)
             values.sword_amount -= 1
-            print(values.win_message)
+            battle_ending(1, False)
             return
+
+    # No swords left
     else:
         print(constants.blocker)
         print(constants.no_weapon)
+        time.sleep(0.5)
+        battle_fight()
 
 
-#This function controls the bow fighting process, using arrows and stamina
+# Bow fighting, initiated from battle_fight()
 def bow_fighting():
+    methods.clear_screen()
     if values.have_bow:
         if values.arrow_amount >= 1:
             print(constants.blocker)
-            print("You use your bow!")
+            print("You used your bow!")
 
             bow_battle_roll = r.randint(1,6)
 
@@ -137,6 +165,7 @@ def bow_fighting():
                 print(constants.bow_arrow_used)
                 values.stamina -= 2
                 values.arrow_amount -= 1
+                battle_ending(2, True)
 
             # Perfect hit
             else:
@@ -144,18 +173,26 @@ def bow_fighting():
                 print(constants.stamina_lost0)
                 print(constants.bow_arrow_used)
                 values.arrow_amount -= 1
+                battle_ending(2, False)
 
+        # No arrows
         else:
             print(constants.blocker)
             print(constants.bow_arrow_used_up)
+            time.sleep(0.5)
+            battle_fight()
 
+    # No bow
     else:
         print(constants.blocker)
         print(constants.no_weapon)
+        time.sleep(0.5)
+        battle_fight()
 
 
-#This function controls which function and process is called based ont the user's choice
-def battle_inventory_action():
+# Inventory system, initiated from battle_menu()
+def battle_inventory():
+    methods.clear_screen()
     print(constants.blocker)
     print("Inventory: ")
     print(constants.blocker)
@@ -183,9 +220,9 @@ def battle_inventory_action():
         print(constants.blocker)
         print("You have " + str(values.keys_amount) + " keys")
     elif choice == 5:
-        return
+        battle_menu()
 
-#This function controls the usage of stamina potions
+# Initiated from battle_inventory_action()
 def potion():
     print(constants.blocker)
     print("You have " + str(values.potion_num) + " Stamina Potions")
@@ -211,11 +248,14 @@ def potion():
             print(constants.blocker)
             print("You do not have a stamina potion!")
     elif choice == 2:
-        battle_inventory_action()
+        battle_inventory()
 
-#This function allows the user to flee the battle, ending it prematurely
-def battle_flee_action():
+# This function allows the user to flee the battle, ending it prematurely
+def battle_flee():
+    methods.clear_screen()
     print(constants.blocker)
     print("You have fled the battle.")
     print("-5 stamina")
     values.stamina -= 5
+    print(f"Stamina left: {values.stamina}")
+    return
