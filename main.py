@@ -105,12 +105,12 @@ def drawMapL2():
 
     map_str = """
         +-----------------+          +------+
-        |                 |          |      |
-        |                 |          |      |
-        |     +---+       +----------+      |
+        |                 +--+       |      |
+        |                 |  |       |      |
+        |     +---+       +  +-------+      |
         |     |   |                         |
         |     |   |                         | 
-        |     |   +-----+---------+    -----+
+        |     |   +-----+---   ---+    -----+
         |     |         |         |         |
     +---+     +------+  +---------+         |
     |                |            |         |
@@ -265,7 +265,7 @@ def room3():
         ["1", "2", "3"],
         [
             "you have three options",
-            "1. explore the     Elixir Vault",
+            "1. explore the Elixir Vault",
             "2. venture into the blade vault",
         ],
     )
@@ -317,8 +317,8 @@ def L2():
         ["1", "2", "3"],
         [
             "you have three options",
-            "1. Enter the mess hall",
-            "2. Enter the armory",
+            "1. Enter the Herbalist's Den",
+            "2. Enter the The Forgemaster's Vault",
             "3. Continue exploring",
         ],
     )
@@ -326,16 +326,38 @@ def L2():
     match choice:
         case "1":
             methods.clear_screen()
-            hm()
+            Herbalist()
         case "2":
             methods.clear_screen()
-            armory()
+            Forgemaster()
         case "3":
             methods.clear_screen()
-            room2()
+            L2part2()
+
+def L2part2():
+    knight = turtle.Turtle()
+    methods.setup_knight(knight)
+    knight.goto(150, 140)
+    methods.scroll_text("The hallway continues, and you find yourself facing a doorway before you: a room pulsing with unsettling activity, and a faint, desperate scream suggesting something terrible is happening within.")
+
+    choice = methods.ask_fixed_bottom(
+        "what will you do?",
+        ["1", "2", "3"],
+        [
+            "you have three options",
+            "1. explore the archery range",
+            "2. Explore into a staircase.",
+        ],
+    )
+
+    match choice:
+        case "1":
+            archeryRange()
+        case "2":
+            L2()
 
 
-
+#------------------------ ROOMS -------------------------------------------------------------------------------------------------------------
 def hm():
     methods.clear_screen()
     methods.scroll_text("you enter into the mess hall, where you encounter Goblin eating pizza.")
@@ -442,7 +464,7 @@ def elixirVault():
     methods.scroll_text("As you enter the alchemy lab, you find a bunch of documents explaining how to make a stamina potion.")
     # + Stamina 
     time.sleep(1.5)
-    room3()
+    room4()
 
 def bladeVault():
     methods.clear_screen()
@@ -496,6 +518,55 @@ def archeryRange():
             methods.scroll_text("You hesitate, unsure of what to do.")
             room4()
 
+def Herbalist():
+    methods.clear_screen()
+    methods.scroll_text("As you enter the alchemy lab, you find a bunch of documents explaining how to make a stamina potion.")
+    # + Stamina 
+    time.sleep(1.5)
+    room3()
+
+def Forgemaster():
+    methods.clear_screen()
+    methods.scroll_text("You enter the blade vault room. You find a goblin cleaning his sword.")
+    
+    choice = methods.ask_fixed_bottom(
+        "what will you do?",
+        ["1", "2", "3"],
+        [
+            "you have two options",
+            "1. Attack the goblin",
+            "2. Leave",
+        ],
+    )
+    match choice:
+        case "1":
+            combat.battle_menu()
+            time.sleep(2)
+            methods.scroll_text("You defeated the goblin! You found 5 swords.")
+            room4()
+        case "2":
+            methods.scroll_text("You back away slowly and leave the mess hall.")
+            room4()
+        case _:
+            methods.scroll_text("You hesitate, unsure of what to do.")
+            room4()
+
+def end1():
+    methods.scroll_text("")
+
+def end2():
+    methods.scroll_text("")
+
+def end3():
+    methods.scroll_text("")
+
+def endLEBRON():
+    methods.scroll_text("")
+
+def win1():
+    methods.scroll_text("")
+
+
 def game_init():
     methods.scroll_text("\033[1;31mFate: the crimson isle\033[0;0m\n")
     time.sleep(2)
@@ -505,9 +576,9 @@ def game_init():
     time.sleep(2)
     methods.scroll_text("However, you don't want to wait for them, so you run off to start exploring.")
     time.sleep(2)
-    methods.scroll_text("Two")
+    methods.scroll_text("Two...")
     time.sleep(0.5)
-    methods.scroll_text("Hours")
+    methods.scroll_text("Hours...")
     time.sleep(0.5)
     methods.scroll_text("Later...")
     time.sleep(2)
@@ -530,7 +601,6 @@ def game_init():
     methods.scroll_text("You know where you must go.")
     time.sleep(1.5)
     methods.clear_screen()
-
 
 if __name__ == "__main__":
     title_screen()
