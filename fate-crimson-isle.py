@@ -299,7 +299,7 @@ def room3(knight):
         "what will you do?",
         ["1", "2"],
         [
-            "you have two options",
+            "You have two options",
             "1. explore The Elixir Vault",
             "2. venture into the blade vault",
         ],
@@ -379,6 +379,7 @@ def L2():
 
 # TODO: Duplicated room (this is boss fight right?)
 # TODO: Update gotos
+
 def L2room2(knight):
     knight.goto(150, 140)
     methods.scroll_text("The hallway continues, and you find yourself facing a doorway before you: a room pulsing with unsettling activity, and a faint, desperate scream suggesting something terrible is happening within.")
@@ -388,7 +389,28 @@ def L2room2(knight):
         ["1", "2"],
         [
             "you have two options",
-            "1. explore the archery range",
+            "1. explore the Quiver Room",
+            "2. Explore into a staircase.",
+        ],
+    )
+
+    match choice:
+        case "1":
+            # TODO: This is broken, you can't just go back to level 1
+            quiverRoom()
+        case "2":
+            ()
+
+def boss_fight(knight):
+    knight.goto(150, 140)
+    methods.scroll_text("The hallway continues, and you find yourself facing a doorway before you: a room pulsing with unsettling activity, and a faint, desperate scream suggesting something terrible is happening within.")
+
+    choice = methods.ask_fixed_bottom(
+        "what will you do?",
+        ["1", "2"],
+        [
+            "you have two options",
+            "1. explore the Quiver Room",
             "2. Explore into a staircase.",
         ],
     )
@@ -397,11 +419,14 @@ def L2room2(knight):
         case "1":
             # TODO: This is broken, you can't just go back to level 1
             # also, the game currently ends here, we have to design the final boss
+<<<<<<< Updated upstream
             archeryRange(knight)
+=======
+            quiverRoom()
+>>>>>>> Stashed changes
             #room4(knight)
         case "2":
             L2()
-
 
 #------------------------ ROOMS -------------------------------------------------------------------------------------------------------------
 def hm(knight):
@@ -595,6 +620,13 @@ def Forgemaster():
         case "2":
             methods.scroll_text("You back away slowly and leave the mess hall.")
 
+def quiverRoom():
+    methods.clear_screen()
+    methods.scroll_text("You enter the Quiver Room. You find a crossbow")
+    values.have_crossbow = True
+    values.arrow_amount = values.arrow_amount + 2 * constants.ARROW_GAIN
+    boss_fight()
+
 def end1():
     methods.scroll_text("")
 
@@ -651,6 +683,7 @@ def game_init():
 if __name__ == "__main__":
     title_screen()
 
+<<<<<<< Updated upstream
 
 
 
@@ -678,4 +711,6 @@ if __name__ == "__main__":
 
 
 
+=======
+>>>>>>> Stashed changes
 #67
