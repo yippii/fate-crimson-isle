@@ -16,6 +16,10 @@ screen.cv._rootwindow.attributes("-topmost", True)
 screen.cv._rootwindow.resizable(False, False)
 screen.cv._rootwindow.overrideredirect(True)
 
+#F4T3 (music)
+import threading
+import pygame
+
 # setup title
 title = turtle.Turtle()
 title.hideturtle()
@@ -74,6 +78,15 @@ def continueOnTerminal():
     title.goto(0, -40)
     title.write("continue on terminal", align="center", font=("arial", 14, "italic"))
     screen.update()
+
+def play_music(filepath: str):
+    def _play():
+        pygame.mixer.init()
+        pygame.mixer.music.load(filepath)
+        pygame.mixer.music.play(-1)
+
+    thread = threading.Thread(target=_play, daemon=True)
+    thread.start()
 
 def drawMapL1():
     methods.clear_gui(screen)
@@ -642,6 +655,8 @@ def game_init():
     methods.scroll_text("You know where you must go.")
     time.sleep(1.5)
     methods.clear_screen()
+    time.sleep(1)
+    play_music("your_music.mp3")
 
 if __name__ == "__main__":
     title_screen()
