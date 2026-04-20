@@ -25,14 +25,20 @@ jobs:
           nuitka-version: main
           script-name: main.py
           mode: onefile
-          include-package: rich
+          include-package: |
+            rich
+            pygame
           enable-plugins: tk-inter
+          include-data-files: '*.mp3=F4T3.mp3'
+          output-file: fate-crimson-isle
+          enable-console: true
+          macos-app-name: "Fate: Crimson Isle"
 
       - name: Uploading artifact
         uses: actions/upload-artifact@v7
         with:
           name: output - ${{matrix.os}}
-          path: build/*.bin
+          path: build/fate-crimson-isle
           
       - name: Uploading artifact (Windows)
         uses: actions/upload-artifact@v7
