@@ -20,7 +20,6 @@ screen.title("Fate: The Crimson Isle")
 screen.setup(width=600, height=600, startx=-1, starty=0)
 screen.cv._rootwindow.attributes("-topmost", True)
 screen.cv._rootwindow.resizable(False, False)
-screen.cv._rootwindow.overrideredirect(True)
 
 # setup title
 title = turtle.Turtle()
@@ -130,17 +129,17 @@ def drawMapL2():
 
     map_str = """
         +-----------------+          +------+
-        |                 +--+       |      |
-        |                 |  |       |      |
-        |     +---+       +  +-------+      |
+        |                 |          |      |
+        |                 |          |      |
+        |     +---+       +----------+      |
         |     |   |                         |
         |     |   |                         | 
         |     |   +-----+---   ---+    -----+
         |     |         |         |         |
     +---+  -  +------+  +---------+         |
-    |                |            |         |
-    |                |            +---------+
-    +----------------------------+
+    |      |         |            |         |
+    |      |         |            +---------+
+    +--   ------   --------------+
     |                            |
     |                            |
     |                            |
@@ -345,7 +344,7 @@ def L2():
     knightL2 = turtle.Turtle()
     cell_w, cell_h, start_x, start_y = drawMapL2()
     methods.setup_knight(knightL2)
-    knightL2.goto(start_x + 8 * cell_w, start_y - 10 * cell_h)
+    knightL2.goto(195, 200)
 
     methods.scroll_text("As you venture down into the dungeon, you reach the lowest level. You can hear the screams of the Necromancer's Experiments.")
     time.sleep(1.5)
@@ -365,14 +364,11 @@ def L2():
     match choice:
         case "1":
             methods.clear_screen()
-            Herbalist()
-            # TODO: This is broken, you can't just go back to level 1
-            # room3(knightL2)
+            Herbalist(knightL2)
             L2room2(knightL2)
         case "2":
             methods.clear_screen()
-            Forgemaster()
-            # TODO: Removed references from L1 room 4, again, map will break
+            Forgemaster(knightL2)
             L2room2(knightL2)
         case "3":
             methods.clear_screen()
@@ -397,10 +393,9 @@ def L2room2(knight):
 
     match choice:
         case "1":
-            # TODO: This is broken, you can't just go back to level 1
-            quiverRoom()
+            quiverRoom(knight)
         case "2":
-            ()
+            kingsHoard(knight)
 
 def boss_fight(knight):
     knight.goto(150, 140)
@@ -420,11 +415,11 @@ def boss_fight(knight):
         case "1":
             # TODO: This is broken, you can't just go back to level 1
             # also, the game currently ends here, we have to design the final boss
-            quiverRoom()
+            quiverRoom(knight)
 
             #room4(knight)
         case "2":
-            kingsHoard()
+            kingsHoard(knight)
 
 #------------------------ ROOMS -------------------------------------------------------------------------------------------------------------
 def hm(knight):
@@ -626,7 +621,7 @@ def quiverRoom(knight):
     methods.scroll_text("You enter the Quiver Room. You find a crossbow")
     values.have_crossbow = True
     values.arrow_amount = values.arrow_amount + 2 * constants.ARROW_GAIN
-    boss_fight()
+    boss_fight(knight)
 
 
 def kingsHoard(knight):
