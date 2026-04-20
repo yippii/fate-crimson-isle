@@ -256,8 +256,6 @@ def room1():
 def room2():
     methods.clear_screen()
     methods.scroll_text("You turn to a new hallway, and the first thing you see is a right door, a left door, and a door at the end, hinting at a mystery.")
-    knight = turtle.Turtle()
-    methods.setup_knight(knight)
     knight.goto(150, 140)
 
     choice = methods.ask_fixed_bottom(
@@ -281,8 +279,6 @@ def room2():
 
 
 def room3():
-    knight = turtle.Turtle()
-    methods.setup_knight(knight)
     knight.goto(150, 140)
     methods.scroll_text("As you turn, the next hallway reveals only two doors: an archery range and a blade vault.")
 
@@ -306,8 +302,6 @@ def room3():
             methods.scroll_text("you seek the wisdom of the king le bron james")
 
 def room4():
-    knight = turtle.Turtle()
-    methods.setup_knight(knight)
     knight.goto(150, 140)
     methods.scroll_text("As you turn, the next hallway reveals only two doors: an archery range and a blade vault.")
 
@@ -329,6 +323,7 @@ def room4():
 
 def L2():
     methods.clear_screen()
+    methods.clear_gui()
     cell_w, cell_h, start_x, start_y = drawMapL2()
     knight = turtle.Turtle()
     methods.setup_knight(knight)
@@ -361,8 +356,6 @@ def L2():
             L2room2()
 
 def L2room2():
-    knight = turtle.Turtle()
-    methods.setup_knight(knight)
     knight.goto(150, 140)
     methods.scroll_text("The hallway continues, and you find yourself facing a doorway before you: a room pulsing with unsettling activity, and a faint, desperate scream suggesting something terrible is happening within.")
 
@@ -405,8 +398,8 @@ def hm():
             
             # Add blue key and stamina potion to inventory here
             constants.blue_key1 = True
-            values.stamina = values.stamina + constants.STAMINA_POTION_GAIN
-            methods.scroll_text("You have"+constants.STAMINA_POTION_DESC + "potions left!")
+            values.potion_num += 1
+            methods.scroll_text("You have"+ values.potion_num + "potions left!")
             
             room2()
         case "2":
@@ -436,7 +429,7 @@ def armory():
             combat.battle_menu()
             time.sleep(2)
             methods.scroll_text("You defeated the goblin! You found 5 swords.")
-            values.sword_amount = values.sword_amount + constants.SWORDS_GAIN
+            values.sword_amount += constants.SWORDS_GAIN
             methods.scroll_text("You Have" + values.sword_amount + "swords left!")
             room2()
         case "2":
@@ -478,7 +471,7 @@ def warChest():
             time.sleep(2)
             methods.scroll_text("You defeated the goblin! You found 5 swords.")
 
-            values.sword_amount = values.sword_amount + constants.SWORDS_GAIN
+            values.sword_amount += constants.SWORDS_GAIN
             methods.scroll_text("You Have" + values.sword_amount + "swords left!")
 
             room3()
@@ -492,18 +485,18 @@ def warChest():
 def lab():
     methods.clear_screen()
     methods.scroll_text("As you enter the alchemy lab, you find a bunch of documents explaining how to make a stamina potion.")
-    # + Stamina 
-    values.stamina = values.stamina + constants.STAMINA_POTION_GAIN
-    methods.scroll_text("You have" + constants.STAMINA_POTION_DESC + "potions left!")
+    # + Potion
+    values.potion_num += 1
+    methods.scroll_text("You have"+ values.potion_num + "potions left!")
     time.sleep(1.5)
     room3()
 
 def elixirVault():
     methods.clear_screen()
     methods.scroll_text("As you enter the alchemy lab, you find a bunch of documents explaining how to make a stamina potion.")
-    # + Stamina 
-    values.stamina = values.stamina + constants.STAMINA_POTION_GAIN
-    methods.scroll_text("You have" + constants.STAMINA_POTION_DESC + "potions left!")
+    # + Potion
+    values.potion_num += 1
+    methods.scroll_text("You have"+ values.potion_num + "potions left!")
     time.sleep(1.5)
     room4()
 
@@ -526,7 +519,7 @@ def bladeVault():
             time.sleep(2)
             methods.scroll_text("You defeated the goblin! You found 5 swords.")
 
-            values.sword_amount = values.sword_amount + constants.SWORDS_GAIN
+            values.sword_amount += constants.SWORDS_GAIN
             methods.scroll_text("You Have" + values.sword_amount + "swords left!")
 
             room4()
@@ -557,7 +550,7 @@ def archeryRange():
             methods.scroll_text("You defeated the goblin! You take his bow.")
 
             values.have_bow = True 
-            values.arrow_amount = values.arrow_amount + constants.ARROW_GAIN
+            values.arrow_amount += constants.ARROW_GAIN
             methods.scroll_text("You Have" + values.arrow_amount + " arrows left!")
 
             room4()
@@ -571,9 +564,9 @@ def archeryRange():
 def Herbalist():
     methods.clear_screen()
     methods.scroll_text("As you enter the alchemy lab, you find a bunch of documents explaining how to make a stamina potion.")
-    # + Stamina 
-    values.stamina = values.stamina + constants.STAMINA_POTION_GAIN
-    methods.scroll_text("You have" + constants.STAMINA_POTION_DESC + "potions left!")
+    # + Potion
+    values.potion_num += 1
+    methods.scroll_text("You have"+ values.potion_num + "potions left!")
     time.sleep(1.5)
     room3()
 
@@ -595,7 +588,7 @@ def Forgemaster():
             combat.battle_menu()
             time.sleep(2)
             methods.scroll_text("You defeated the goblin! You found 5 swords.")
-            values.sword_amount = values.sword_amount + constants.SWORDS_GAIN
+            values.sword_amount += constants.SWORDS_GAIN
             methods.scroll_text("You Have" + values.sword_amount + "swords left!")
             room4()
         case "2":
@@ -624,29 +617,29 @@ def win1():
 def game_init():
     methods.scroll_text("\033[1;31mFate: the crimson isle\033[0;0m\n")
     time.sleep(2)
-    methods.scroll_text("You are a level 1 adventurer working for King Lebron inc., tasked with exploring the mysterious island, the Crimson Isle.")
+    methods.scroll_text("You are a level 1 adventurer working for King Lebron inc., tasked with exploring the mysterious island, the Crimson Isle.\n")
     time.sleep(2)
-    methods.scroll_text("You land amidst the crashing waves, peering back at the approaching vessel. It carries a team of experienced adventurers, the ones that you are meant to shadow on this expedition.")
+    methods.scroll_text("You land amidst the crashing waves, peering back at the approaching vessel. It carries a team of experienced adventurers, the ones that you are meant to shadow on this expedition.\n")
     time.sleep(2)
-    methods.scroll_text("However, you don't want to wait for them, so you run off to start exploring.")
+    methods.scroll_text("However, you don't want to wait for them, so you run off to start exploring.\n")
     time.sleep(2)
     methods.scroll_text("Two...")
     time.sleep(0.5)
     methods.scroll_text("Hours...")
     time.sleep(0.5)
-    methods.scroll_text("Later...")
+    methods.scroll_text("Later...\n")
     time.sleep(2)
-    methods.scroll_text("Returning to the shore, you reach your team's camp.")
+    methods.scroll_text("Returning to the shore, you reach your team's camp.\n")
     time.sleep(2)
-    methods.scroll_text("You enter your boss' tent, and start to regale them with your tales of glory from the past two hours.")
+    methods.scroll_text("You enter your boss' tent, and start to regale them with your tales of glory from the past two hours.\n")
     time.sleep(2)
-    methods.scroll_text("After a few moments, you notice that they have not responded, nor have they moved from their position on the cot.")
+    methods.scroll_text("After a few moments, you notice that they have not responded, nor have they moved from their position on the cot.\n")
     time.sleep(2)
-    methods.scroll_text("You walk up to them, and put your hand on their shoulder...")
+    methods.scroll_text("You walk up to them, and put your hand on their shoulder...\n")
     time.sleep(0.5)
     methods.scroll_text("...")
     time.sleep(1.5)
-    methods.scroll_text("They fall dead at your feet.")
+    methods.scroll_text("They fall dead at your feet.\n")
     time.sleep(2)
     methods.scroll_text("Returning outside, you know that the rest of your team has suffered the same fate.")                        
     methods.scroll_text("Consumed with a desire for revenge, you know that you must avenge them.")

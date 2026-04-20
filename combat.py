@@ -233,14 +233,12 @@ def potion():
     print(constants.blocker)
     print("You have " + str(values.potion_num) + " Stamina Potions")
 
-
-    print(" 1 - Yes\n 2 - No")
     choice = methods.ask_fixed_bottom(
         "Would you like to use a stamina potion?",
         [ "1", "2" ],
         [
-            "1 - Yes",
-            "2 - No"
+            "1 - Use a stamina potion",
+            "2 - Maybe later"
         ]
     )
 
