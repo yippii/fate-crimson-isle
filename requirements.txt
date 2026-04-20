@@ -1,2 +1,2 @@
-pygame==2.6.1
+pygame-ce==2.5.7
 rich==15.0.0
