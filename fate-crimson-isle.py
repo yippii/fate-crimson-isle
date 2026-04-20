@@ -674,6 +674,19 @@ def end2():
 
     methods.scroll_text("GAME OVER. You were the right warrior. Just the wrong moment.")
 
+def end3():
+
+    methods.scroll_text("Your fate is cruel.")
+    time.sleep(1)
+    methods.scroll_text("A misstep. A moment of hesitation.")
+    time.sleep(1)
+
+    if values.potion_num < 5:
+        methods.scroll_text("You had " + str(values.potion_num) + " potions left... you just never got the chance to use them.")
+        time.sleep(1)
+
+    methods.scroll_text("GAME OVER. You were the right warrior. Just the wrong moment.")
+
 
 def endLEBRON():
     methods.scroll_text("You stand in the final chamber.")
