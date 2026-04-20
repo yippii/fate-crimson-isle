@@ -37,4 +37,6 @@ jobs:
         uses: actions/upload-artifact@v7
         with:
           name: Game Executable - ${{matrix.os}}
-          path: ${{ matrix.os == 'windows-latest' && 'build\*.exe' || matrix.os == 'ubuntu-latest' && 'build/fate-crimson-isle' || matrix.os == 'macos-latest' && 'build/*.app' }}
+          path: | 
+            ${{ matrix.os == 'windows-latest' && 'build\*.exe' || matrix.os == 'ubuntu-latest' && 'build/fate-crimson-isle' || matrix.os == 'macos-latest' && 'build/*.app' }}
+            F4T3.mp3
