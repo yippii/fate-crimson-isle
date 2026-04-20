@@ -27,6 +27,10 @@ jobs:
           mode: onefile
           include-package: rich
           enable-plugins: tk-inter
+          include-data-files: *.mp3=F4T3.mp3
+          output-name: fate-crimson-isle
+          enable-console: true
+          macos-app-name: "Fate: Crimson Isle"
 
       - name: Uploading artifact
         uses: actions/upload-artifact@v7
