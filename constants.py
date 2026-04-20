@@ -5,6 +5,7 @@ perfect_hit = "Perfect Hit!"
 stamina_lost0 = "No Stamina Lost."
 stamina_lost1 = "You lost a stamina."
 stamina_lost2 = "You lost two stamina."
+stamina_lost3 = "You lost three stamina."
 
 sword_no_sword_wear = "Your sword remains strong!"
 sword_sword_wear1 = "You used a sword!."
@@ -17,13 +18,6 @@ wyd = "What will you do?"
 no_weapon = "You do not have this weapon!"
 
 blocker = 15*"-"
-
-# Actions (stamina costs)
-PICKUP_COIN_COST = -1
-ENTER_ROOM_COST = -5
-KILL_GOBLIN_SWORD_COST = -2
-KILL_GOBLIN_BOW_COST = -3
-KILL_GOBLIN_CROSSBOW_COST = -4
 
 # Rewards
 STAMINA_POTION_GAIN = 25
