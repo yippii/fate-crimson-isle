@@ -20,3 +20,4 @@ green_key3 = False
 
 
 room_cleared = 0
+kingsHoard_ROOM = False

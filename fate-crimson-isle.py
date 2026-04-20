@@ -483,7 +483,8 @@ def armory(knight):
         case "2":
             methods.scroll_text("You back away slowly and leave the armory.")
 
-def closet():
+def closet(knight):
+    knight.goto(190, -50)
     methods.clear_screen()
     methods.scroll_text(".")
     #Puzzle room...
@@ -648,16 +649,133 @@ def kingsHoard(knight):
 
 #------------------------------------- ENDINGS ----------------------------------------------------------------------------------------
 def end1():
-    methods.scroll_text("")
+
+
+    if values.have_bow or values.have_crossbow:
+        methods.scroll_text("You raise your " + ("crossbow" if values.have_crossbow else "bow") + " and fire.")
+        time.sleep(1)
+        methods.scroll_text("The bolt strikes true... but the Necromancer laughs.")
+        time.sleep(1)
+        methods.scroll_text("'You found the weapon, but you lack the power to wield it properly.'")
+        time.sleep(1)
+    else:
+        methods.scroll_text("You charge in with only your sword.")
+        time.sleep(1)
+        methods.scroll_text("The Necromancer smiles. 'A blade? Against ME?'")
+        time.sleep(1)
+
+    methods.scroll_text("You fought bravely, but the path you walked was not enough to prepare you.")
+    time.sleep(1)
+    methods.scroll_text("The Necromancer raises his hand. A bolt of crimson energy strikes you down.")
+    time.sleep(1.5)
+    methods.scroll_text("Rooms cleared: " + str(values.room_cleared) + " — So close, yet so far.")
+    time.sleep(1)
+    methods.scroll_text("GAME OVER. The Crimson Isle claims another soul.")
+
 
 def end2():
-    methods.scroll_text("")
+    methods.scroll_text("You enter the boss chamber, armed and ready.")
+    time.sleep(1)
+
+    if values.have_crossbow:
+        methods.scroll_text("Your crossbow gleams. Your arrows are notched.")
+    elif values.have_bow:
+        methods.scroll_text("Your bow is drawn. You have " + str(values.arrow_amount) + " arrows left.")
+    else:
+        methods.scroll_text("Your sword is raised. You've cleared " + str(values.room_cleared) + " rooms to get here.")
+
+    time.sleep(1)
+    methods.scroll_text("The fight begins. You had everything you needed...")
+    time.sleep(1.5)
+    methods.scroll_text("But fate is cruel.")
+    time.sleep(1)
+    methods.scroll_text("A misstep. A moment of hesitation.")
+    time.sleep(1)
+    methods.scroll_text("The Necromancer seizes the opening and drives a cursed blade through your chest.")
+    time.sleep(1.5)
+
+    if values.potion_num > 0:
+        methods.scroll_text("You had " + str(values.potion_num) + " potions left... you just never got the chance to use them.")
+        time.sleep(1)
+
+    methods.scroll_text("GAME OVER. You were the right warrior. Just the wrong moment.")
+
 
 def endLEBRON():
-    methods.scroll_text("")
+    methods.scroll_text("You stand in the final chamber.")
+    time.sleep(1)
+    methods.scroll_text("But instead of a Necromancer, you find a throne.")
+    time.sleep(1)
+    methods.scroll_text("And on that throne... sits King LeBron.")
+    time.sleep(1.5)
+    methods.scroll_text("'I've been watching you this whole time,' he says, spinning a basketball on one finger.")
+    time.sleep(1)
+    methods.scroll_text("'You work for King LeBron Inc. You always have.'")
+    time.sleep(1)
+    methods.scroll_text("'The Necromancer? That was me. The dead teammates? Paid actors.'")
+    time.sleep(1.5)
+    methods.scroll_text("'This was all... a job interview.'")
+    time.sleep(1)
+    methods.scroll_text("He stands, extends his hand, and offers you a contract.")
+    time.sleep(1)
+
+    if values.room_cleared >= 8:
+        methods.scroll_text("'You cleared " + str(values.room_cleared) + " rooms. You're hired. Welcome to the inner circle.'")
+        time.sleep(1)
+        methods.scroll_text("ENDING: THE LEBRON CHRONICLES. You are now employee of the month.")
+    else:
+        methods.scroll_text("'Only " + str(values.room_cleared) + " rooms? You're on probation.'")
+        time.sleep(1)
+        methods.scroll_text("ENDING: THE LEBRON CHRONICLES. You get a participation trophy and a mediocre benefits package.")
+
 
 def win1():
-    methods.scroll_text("")
+    methods.scroll_text("You enter the final chamber.")
+    time.sleep(1)
+    methods.scroll_text("The Necromancer towers before you, wreathed in crimson flame.")
+    time.sleep(1)
+    methods.scroll_text("'You made it this far. Impressive. But it ends HERE.'")
+    time.sleep(1.5)
+
+    if values.room_cleared >= 8:
+        methods.scroll_text("But you are not the same adventurer who stepped off that boat.")
+        time.sleep(1)
+        methods.scroll_text("You cleared " + str(values.room_cleared) + " rooms. You bled for every one of them.")
+        time.sleep(1)
+    else:
+        methods.scroll_text("You are battered, but unbroken.")
+        time.sleep(1)
+
+    if values.have_crossbow:
+        methods.scroll_text("You raise your crossbow and fire two bolts in quick succession.")
+        time.sleep(1)
+        methods.scroll_text("The Necromancer staggers. 'Impossible...'")
+    elif values.have_bow and values.arrow_amount > 0:
+        methods.scroll_text("You draw your bow and loose your last arrow.")
+        time.sleep(1)
+        methods.scroll_text("It strikes the Necromancer square in the chest, shattering his amulet.")
+    else:
+        methods.scroll_text("You charge, sword raised, screaming the names of your fallen teammates.")
+        time.sleep(1)
+        methods.scroll_text("Blade meets curse. The Necromancer did not expect sheer will.")
+
+    time.sleep(1.5)
+    methods.scroll_text("He collapses. The crimson light fades.")
+    time.sleep(1)
+    methods.scroll_text("The castle shudders. Then silence.")
+    time.sleep(1.5)
+    methods.scroll_text("You walk out into the cold morning air.")
+    time.sleep(1)
+    methods.scroll_text("The Crimson Isle is free.")
+    time.sleep(1)
+
+    if values.potion_num > 0:
+        methods.scroll_text("You still have " + str(values.potion_num) + " potions left. You didn't even need them.")
+        time.sleep(1)
+
+    methods.scroll_text("Swords: " + str(values.sword_amount) + "  |  Arrows: " + str(values.arrow_amount) + "  |  Rooms cleared: " + str(values.room_cleared))
+    time.sleep(1)
+    methods.scroll_text("YOU WIN. The legend of the Crimson Isle will be told for generations.")
 
 #-------------------------------------GAME START----------------------------------------------------------------------------------------
 def game_init():
