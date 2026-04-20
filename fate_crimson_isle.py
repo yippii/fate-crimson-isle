@@ -71,16 +71,15 @@ def title_screen():
 
 def continueOnTerminal():
     methods.clear_gui(screen)
-    # draw title
+        # draw title
+    title.color("#FF2200")
     title.goto(0, 80)
-    title.write("Fate", align="center", font=("courier", 48, "bold"))
-
+    title.write("Fate:", align="center", font=("Impact", 48, "bold"))
     title.goto(0, 30)
-    title.write("The Crimson Isle", align="center", font=("courier", 24, "normal"))
-
-    title.color("white")
+    title.write("The Crimson Isle", align="center", font=("Impact", 24, "bold"))
+    title.color("#FF6600")
     title.goto(0, -40)
-    title.write("Continue on terminal", align="center", font=("arial", 14, "italic"))
+    title.write("Continue on terminal", align="center", font=("Impact", 14, "bold"))
     screen.update()
 
 def play_music(filepath: str):
@@ -767,6 +766,7 @@ def win1():
 
 #-------------------------------------GAME START----------------------------------------------------------------------------------------
 def game_init():
+    time.sleep(0.3)
     console.Console().print("Fate: The Crimson Isle", style="red")
     time.sleep(2)
     methods.scroll_text("You are a level 1 adventurer working for King LeBron inc., tasked with exploring the mysterious island, the Crimson Isle.\n")
