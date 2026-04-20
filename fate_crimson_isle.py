@@ -30,33 +30,30 @@ title.color("crimson")
 
 def title_screen():
     # draw title
+    title.color("#FF2200")
     title.goto(0, 80)
-    title.write("Fate", align="center", font=("courier", 48, "bold"))
-
+    title.write("FATE:", align="center", font=("Impact", 67, "bold"))
     title.goto(0, 30)
-    title.write("The Crimson Isle:", align="center", font=("courier", 24, "normal"))
-
+    title.write("The Crimson Isle", align="center", font=("Impact", 24, "bold"))
     # subtitle
-    title.color("white")
+    title.color("#FF6600")
     title.goto(0, -40)
-    title.write("A terminal roguelike adventure", align="center", font=("arial", 14, "italic"))
-
+    title.write("A terminal roguelike adventure", align="center", font=("Impact", 16, "bold"))
     # start instruction
+    title.color("#FF2200")
     title.goto(0, -100)
-    title.write("Click anywhere to begin", align="center", font=("arial", 16, "bold"))
-
-    #decorative line
+    title.write("Click anywhere to begin", align="center", font=("Impact", 16, "bold"))
+    # decorative line
     title.goto(-200, 10)
     title.pendown()
-    title.color("crimson")
+    title.color("#FF2200")
     title.pensize(3)
     title.forward(400)
     title.penup()
-
     screen.update()
 
     parser = argparse.ArgumentParser(description="Fate: The Crimson Isle")
-    parser.add_argument("-s", "--skip", action="store_true", help="Skip Game" )
+    parser.add_argument("-s", "--skip", action="store_true", help="Skip Game")
 
     # click to exit
     def start_game(x, y):
