@@ -387,7 +387,7 @@ def L2room2(knight):
         [
             "You have two options",
             "1. Explore the Quiver Room",
-            "2. Explore into a staircase.",
+            "2. Explore into the staircase.",
         ],
     )
 
@@ -626,7 +626,13 @@ def quiverRoom(knight):
 
 def kingsHoard(knight):
     knight.goto(-80, -55)
+    methods.clear_screen()
+    methods.scroll_text("You enter the Quiver Room. You find a crossbow")
+    values.have_crossbow = True
+    values.arrow_amount = values.arrow_amount + 2 * constants.ARROW_GAIN
+    boss_fight(knight)
 
+#------------------------------------- ENDINGs ----------------------------------------------------------------------------------------
 def end1():
     methods.scroll_text("")
 
@@ -639,7 +645,7 @@ def endLEBRON():
 def win1():
     methods.scroll_text("")
 
-
+#-------------------------------------GAME START----------------------------------------------------------------------------------------
 def game_init():
     console.Console().print("Fate: The Crimson Isle", style="red")
     time.sleep(2)
