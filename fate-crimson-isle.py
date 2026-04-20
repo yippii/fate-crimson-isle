@@ -255,7 +255,7 @@ def room1():
             room2(knight)
 
 def room2(knight):
-    knight.goto(140, 170)
+    knight.goto(150, 150)
     methods.clear_screen()
     methods.scroll_text("You turn to a new hallway, and the first thing you see is a right door, a left door, and a door at the end, hinting at a mystery.")
 
@@ -283,7 +283,8 @@ def room2(knight):
 
 
 def room3(knight):
-    knight.goto(150, 140)
+    methods.clear_screen()
+    knight.goto(140, 135)
     methods.scroll_text("As you turn, the next hallway reveals only two doors: an archery range and a blade vault.")
 
     choice = methods.ask_fixed_bottom(
@@ -313,9 +314,9 @@ def room4(knight):
 
     choice = methods.ask_fixed_bottom(
         "what will you do?",
-        ["1", "2", "3"],
+        ["1", "2"],
         [
-            "you have three options",
+            "you have two options",
             "1. explore the archery range",
             "2. Explore into a staircase.",
         ],
@@ -398,7 +399,7 @@ def hm():
 
     choice = methods.ask_fixed_bottom(
         "what will you do?",
-        ["1", "2", "3"],
+        ["1", "2"],
         [
             "you have two options",
             "1. Attack the goblin",
@@ -414,11 +415,9 @@ def hm():
             # Add blue key and stamina potion to inventory here
             values.blue_key1 = True
             values.potion_num += 1
-            methods.scroll_text("You have"+ str(values.potion_num) + " potions left!")
+            methods.scroll_text("You have "+ str(values.potion_num) + " potions left!")
         case "2":
             methods.scroll_text("You back away slowly and leave the mess hall.")
-        case _:
-            methods.scroll_text("You hesitate, unsure of what to do.")
     # combat.battle_menu()
     # time.sleep(2)
 
@@ -428,7 +427,7 @@ def armory():
     
     choice = methods.ask_fixed_bottom(
         "what will you do?",
-        ["1", "2", "3"],
+        ["1", "2"],
         [
             "you have two options",
             "1. Attack the goblin",
@@ -444,8 +443,6 @@ def armory():
             methods.scroll_text("You Have " + str(values.sword_amount) + " swords left!")
         case "2":
             methods.scroll_text("You back away slowly and leave the mess hall.")
-        case _:
-            methods.scroll_text("You hesitate, unsure of what to do.")
 
 # def hallway():
 #     methods.clear_screen()
@@ -465,7 +462,7 @@ def warChest():
     
     choice = methods.ask_fixed_bottom(
         "what will you do?",
-        ["1", "2", "3"],
+        ["1", "2"],
         [
             "you have two options",
             "1. Attack the goblin",
@@ -482,15 +479,13 @@ def warChest():
             methods.scroll_text("You Have" + str(values.sword_amount) + "swords left!")
         case "2":
             methods.scroll_text("You back away slowly and leave the mess hall.")
-        case _:
-            methods.scroll_text("You hesitate, unsure of what to do.")
 
 def lab():
     methods.clear_screen()
     methods.scroll_text("As you enter the alchemy lab, you find a bunch of documents explaining how to make a stamina potion.")
     # + Potion
     values.potion_num += 1
-    methods.scroll_text("You have" + str(values.potion_num) + "potions left!")
+    methods.scroll_text("You have " + str(values.potion_num) + " potions left!")
     time.sleep(1.5)
 
 def elixirVault():
@@ -507,7 +502,7 @@ def bladeVault():
     
     choice = methods.ask_fixed_bottom(
         "what will you do?",
-        ["1", "2", "3"],
+        ["1", "2"],
         [
             "you have two options",
             "1. Attack the goblin",
@@ -524,8 +519,7 @@ def bladeVault():
             methods.scroll_text("You Have " + str(values.sword_amount) + " swords left!")
         case "2":
             methods.scroll_text("You back away slowly and leave the mess hall.")
-        case _:
-            methods.scroll_text("You hesitate, unsure of what to do.")
+
 
 def archeryRange():
     methods.clear_screen()
@@ -533,7 +527,7 @@ def archeryRange():
     
     choice = methods.ask_fixed_bottom(
         "what will you do?",
-        ["1", "2", "3"],
+        ["1", "2"],
         [
             "you have two options",
             "1. Attack the goblin",
@@ -551,8 +545,6 @@ def archeryRange():
             methods.scroll_text("You Have " + str(values.arrow_amount) + " arrows left!")
         case "2":
             methods.scroll_text("You back away slowly and leave the archery range.")
-        case _:
-            methods.scroll_text("You hesitate, unsure of what to do.")
 
 def Herbalist():
     methods.clear_screen()
@@ -568,7 +560,7 @@ def Forgemaster():
     
     choice = methods.ask_fixed_bottom(
         "what will you do?",
-        ["1", "2", "3"],
+        ["1", "2"],
         [
             "you have two options",
             "1. Attack the goblin",
@@ -584,8 +576,6 @@ def Forgemaster():
             methods.scroll_text("You Have" + str(values.sword_amount) + " swords left!")
         case "2":
             methods.scroll_text("You back away slowly and leave the mess hall.")
-        case _:
-            methods.scroll_text("You hesitate, unsure of what to do.")
 
 def end1():
     methods.scroll_text("")

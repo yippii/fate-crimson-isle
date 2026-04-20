@@ -125,6 +125,7 @@ def sword_fighting():
                 print(constants.stamina_lost0)
                 print(constants.sword_no_sword_wear)
                 battle_fight()
+            time.sleep(0.5)
 
         # Great hit
         elif sword_battle_roll <= 4:
