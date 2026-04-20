@@ -1,6 +1,7 @@
 import time
 import turtle
 import argparse
+import rich.console as console
 
 import combat
 import methods
@@ -644,7 +645,7 @@ def win1():
 
 
 def game_init():
-    methods.scroll_text("\033[1;31mFate: the crimson isle\033[0;0m\n")
+    console.Console().print("Fate: the crimson isle", style="red")
     time.sleep(2)
     methods.scroll_text("You are a level 1 adventurer working for King Lebron inc., tasked with exploring the mysterious island, the Crimson Isle.\n")
     time.sleep(1)

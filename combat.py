@@ -43,15 +43,9 @@ def battle_ending(mode, missed):
         else:
             print(f"Stamina left: {values.stamina}")
             print(constants.blocker)
-            time.sleep(0.5)
-    # Bow
+            time.sleep(1)
+    # Bow / Crossbow
     elif mode == 2:
-        print(f"Stamina left: {values.stamina}\nArrows left: {values.arrow_amount}")
-        print(constants.blocker)
-        time.sleep(0.5)
-
-    #Crossbow
-    elif mode == 3:
         print(f"Stamina left: {values.stamina}\nArrows left: {values.arrow_amount}")
         print(constants.blocker)
         time.sleep(0.5)
