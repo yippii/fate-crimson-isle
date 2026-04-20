@@ -338,6 +338,8 @@ def room4(knight):
         case "2":
             L2()
 
+#--------------- LEVEL 2 -------------------------------------------------------------------------------------------------------------------------------
+
 def L2():
     methods.clear_screen()
     methods.clear_gui(screen)
@@ -374,7 +376,6 @@ def L2():
             methods.clear_screen()
             L2room2(knightL2)
 
-# TODO: Duplicated room (this is boss fight right?)
 # TODO: Update gotos
 
 def L2room2(knight):
@@ -397,9 +398,9 @@ def L2room2(knight):
         case "2":
             kingsHoard(knight)
 
-def boss_fight(knight):
+def L2room3(knight):
     knight.goto(150, 140)
-    methods.scroll_text("The hallway continues, and you find yourself facing a doorway before you: a room pulsing with unsettling activity, and a faint, desperate scream suggesting something terrible is happening within.")
+    methods.scroll_text("Dooming testament of Avril—you made it all the way here, but you will never take me down.")
 
     choice = methods.ask_fixed_bottom(
         "what will you do?",
@@ -420,6 +421,31 @@ def boss_fight(knight):
             #room4(knight)
         case "2":
             kingsHoard(knight)
+
+def boss_fight(knight):
+    knight.goto(150, 140)
+    methods.scroll_text("Dooming testament of Avril, You made it all the way here, but you will never take me down.")
+
+    choice = methods.ask_fixed_bottom(
+        "what will you do?",
+        ["1", "2"],
+        [
+            "You have two options",
+            "1. Explore the Quiver Room",
+            "2. Explore into a staircase.",
+        ],
+    )
+
+    match choice:
+        case "1":
+            # TODO: This is broken, you can't just go back to level 1
+            # also, the game currently ends here, we have to design the final boss
+            quiverRoom(knight)
+
+            #room4(knight)
+        case "2":
+            kingsHoard(knight)
+
 
 #------------------------ ROOMS -------------------------------------------------------------------------------------------------------------
 def hm(knight):
@@ -621,7 +647,7 @@ def quiverRoom(knight):
     methods.scroll_text("You enter the Quiver Room. You find a crossbow")
     values.have_crossbow = True
     values.arrow_amount = values.arrow_amount + 2 * constants.ARROW_GAIN
-    boss_fight(knight)
+    L2room3(knight)
 
 
 def kingsHoard(knight):
@@ -630,7 +656,7 @@ def kingsHoard(knight):
     methods.scroll_text("You enter the Quiver Room. You find a crossbow")
     values.have_crossbow = True
     values.arrow_amount = values.arrow_amount + 2 * constants.ARROW_GAIN
-    boss_fight(knight)
+    L2room3(knight)
 
 #------------------------------------- ENDINGS ----------------------------------------------------------------------------------------
 def end1():
