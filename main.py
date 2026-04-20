@@ -23,7 +23,6 @@ title.speed(0)
 title.penup()
 title.color("crimson")
 
-
 def title_screen():
     # draw title
     title.goto(0, 80)
@@ -236,13 +235,15 @@ def room1():
         case "2":
             methods.clear_screen()
             armory()
+            room2(knight)
         case "3":
             methods.clear_screen()
-            room2()
+            room2(knight)
 
-def room2():
+def room2(knight):
     methods.clear_screen()
     methods.scroll_text("You turn to a new hallway, and the first thing you see is a right door, a left door, and a door at the end, hinting at a mystery.")
+    methods.setup_knight(knight)
     knight.goto(150, 140)
 
     choice = methods.ask_fixed_bottom(
@@ -259,22 +260,25 @@ def room2():
     match choice:
         case "1":
             closet()
+            room3(knight)
         case "2":
             warChest()
+            room3(knight)
         case "3":
             lab()
+            room3(knight)
 
 
-def room3():
+def room3(knight):
     knight.goto(150, 140)
     methods.scroll_text("As you turn, the next hallway reveals only two doors: an archery range and a blade vault.")
 
     choice = methods.ask_fixed_bottom(
         "what will you do?",
-        ["1", "2", "3"],
+        ["1", "2"],
         [
-            "you have three options",
-            "1. explore the Elixir Vault",
+            "you have two options",
+            "1. explore The Elixir Vault",
             "2. venture into the blade vault",
         ],
     )
@@ -282,13 +286,15 @@ def room3():
     match choice:
         case "1":
             elixirVault()
+            room4(knight)
         case "2":
             bladeVault()
+            room4(knight)
         case "le bron":
             methods.clear_screen()
             methods.scroll_text("you seek the wisdom of the king le bron james")
 
-def room4():
+def room4(knight):
     knight.goto(150, 140)
     methods.scroll_text("As you turn, the next hallway reveals only two doors: an archery range and a blade vault.")
 
@@ -306,15 +312,15 @@ def room4():
         case "1":
             archeryRange()
         case "2":
-            L2()
+            L2(knight)
 
-def L2():
+def L2(knight):
     methods.clear_screen()
-    methods.clear_gui()
+    methods.clear_gui(screen)
+    knightL2 = turtle.Turtle()
     cell_w, cell_h, start_x, start_y = drawMapL2()
-    knight = turtle.Turtle()
-    methods.setup_knight(knight)
-    knight.goto(start_x + 8 * cell_w, start_y - 10 * cell_h)
+    methods.setup_knight(knightL2)
+    knightL2.goto(start_x + 8 * cell_w, start_y - 10 * cell_h)
 
     methods.scroll_text("As you venture down into the dungeon, you reach the lowest level. You can hear the screams of the Necromancer's Experiments.")
     time.sleep(1.5)
@@ -335,22 +341,28 @@ def L2():
         case "1":
             methods.clear_screen()
             Herbalist()
+            # TODO: This is broken, you can't just go back to level 1
+            # room3(knightL2)
+            L2room2(knightL2)
         case "2":
             methods.clear_screen()
             Forgemaster()
+            # TODO: Removed references from L1 room 4, again, map will break
+            L2room2(knightL2)
         case "3":
             methods.clear_screen()
-            L2room2()
+            L2room2(knightL2)
 
-def L2room2():
+# TODO: Duplicated room (this is boss fight right)
+def L2room2(knight):
     knight.goto(150, 140)
     methods.scroll_text("The hallway continues, and you find yourself facing a doorway before you: a room pulsing with unsettling activity, and a faint, desperate scream suggesting something terrible is happening within.")
 
     choice = methods.ask_fixed_bottom(
         "what will you do?",
-        ["1", "2", "3"],
+        ["1", "2"],
         [
-            "you have three options",
+            "you have two options",
             "1. explore the archery range",
             "2. Explore into a staircase.",
         ],
@@ -358,9 +370,12 @@ def L2room2():
 
     match choice:
         case "1":
+            # TODO: This is broken, you can't just go back to level 1
+            # also, the game currently ends here, we have to design the final boss
             archeryRange()
+            #room4(knight)
         case "2":
-            L2()
+            L2(knight)
 
 
 #------------------------ ROOMS -------------------------------------------------------------------------------------------------------------
@@ -381,12 +396,12 @@ def hm():
         case "1":
             combat.battle_menu()
             time.sleep(2)
-            methods.scroll_text("You defeated the goblin! You find a blue key and a stamina potion.")
+            methods.scroll_text("You defeated the goblin! You found a blue key and a stamina potion.")
             
             # Add blue key and stamina potion to inventory here
-            constants.blue_key1 = True
+            values.blue_key1 = True
             values.potion_num += 1
-            methods.scroll_text("You have"+ values.potion_num + "potions left!")
+            methods.scroll_text("You have"+ str(values.potion_num) + "potions left!")
             
             room2()
         case "2":
@@ -415,16 +430,13 @@ def armory():
         case "1":
             combat.battle_menu()
             time.sleep(2)
-            methods.scroll_text("You defeated the goblin! You found 5 swords.")
+            methods.scroll_text("You defeated the goblin! You found 3 swords.\n")
             values.sword_amount += constants.SWORDS_GAIN
-            methods.scroll_text("You Have" + values.sword_amount + "swords left!")
-            room2()
+            methods.scroll_text("You Have " + str(values.sword_amount) + " swords left!")
         case "2":
             methods.scroll_text("You back away slowly and leave the mess hall.")
-            room2()
         case _:
             methods.scroll_text("You hesitate, unsure of what to do.")
-            room2()
 
 # def hallway():
 #     methods.clear_screen()
@@ -437,7 +449,6 @@ def closet():
     methods.scroll_text(".")
     #Puzzle room...
     time.sleep(1.5)
-    room3()
 
 def warChest():
     methods.clear_screen()
@@ -456,36 +467,30 @@ def warChest():
         case "1":
             combat.battle_menu()
             time.sleep(2)
-            methods.scroll_text("You defeated the goblin! You found 5 swords.")
+            methods.scroll_text("You defeated the goblin! You found 3 swords.")
 
             values.sword_amount += constants.SWORDS_GAIN
-            methods.scroll_text("You Have" + values.sword_amount + "swords left!")
-
-            room3()
+            methods.scroll_text("You Have" + str(values.sword_amount) + "swords left!")
         case "2":
             methods.scroll_text("You back away slowly and leave the mess hall.")
-            room3()
         case _:
             methods.scroll_text("You hesitate, unsure of what to do.")
-            room3()
 
 def lab():
     methods.clear_screen()
     methods.scroll_text("As you enter the alchemy lab, you find a bunch of documents explaining how to make a stamina potion.")
     # + Potion
     values.potion_num += 1
-    methods.scroll_text("You have"+ values.potion_num + "potions left!")
+    methods.scroll_text("You have" + str(values.potion_num) + "potions left!")
     time.sleep(1.5)
-    room3()
 
 def elixirVault():
     methods.clear_screen()
     methods.scroll_text("As you enter the alchemy lab, you find a bunch of documents explaining how to make a stamina potion.")
     # + Potion
     values.potion_num += 1
-    methods.scroll_text("You have"+ values.potion_num + "potions left!")
+    methods.scroll_text("You have" + str(values.potion_num) + "potions left!")
     time.sleep(1.5)
-    room4()
 
 def bladeVault():
     methods.clear_screen()
@@ -504,18 +509,14 @@ def bladeVault():
         case "1":
             combat.battle_menu()
             time.sleep(2)
-            methods.scroll_text("You defeated the goblin! You found 5 swords.")
+            methods.scroll_text("You defeated the goblin! You found 3 swords.")
 
             values.sword_amount += constants.SWORDS_GAIN
-            methods.scroll_text("You Have" + values.sword_amount + "swords left!")
-
-            room4()
+            methods.scroll_text("You Have " + str(values.sword_amount) + " swords left!")
         case "2":
             methods.scroll_text("You back away slowly and leave the mess hall.")
-            room4()
         case _:
             methods.scroll_text("You hesitate, unsure of what to do.")
-            room4()
 
 def archeryRange():
     methods.clear_screen()
@@ -534,28 +535,23 @@ def archeryRange():
         case "1":
             combat.battle_menu()
             time.sleep(2)
-            methods.scroll_text("You defeated the goblin! You take his bow.")
+            methods.scroll_text("You defeated the goblin! You took his bow.")
 
             values.have_bow = True 
             values.arrow_amount += constants.ARROW_GAIN
-            methods.scroll_text("You Have" + values.arrow_amount + " arrows left!")
-
-            room4()
+            methods.scroll_text("You Have " + str(values.arrow_amount) + " arrows left!")
         case "2":
             methods.scroll_text("You back away slowly and leave the archery range.")
-            room4()
         case _:
             methods.scroll_text("You hesitate, unsure of what to do.")
-            room4()
 
 def Herbalist():
     methods.clear_screen()
     methods.scroll_text("As you enter the alchemy lab, you find a bunch of documents explaining how to make a stamina potion.")
     # + Potion
     values.potion_num += 1
-    methods.scroll_text("You have"+ values.potion_num + "potions left!")
+    methods.scroll_text("You have " + str(values.potion_num) + " potions left!")
     time.sleep(1.5)
-    room3()
 
 def Forgemaster():
     methods.clear_screen()
@@ -574,16 +570,13 @@ def Forgemaster():
         case "1":
             combat.battle_menu()
             time.sleep(2)
-            methods.scroll_text("You defeated the goblin! You found 5 swords.")
+            methods.scroll_text("You defeated the goblin! You found 3 swords.")
             values.sword_amount += constants.SWORDS_GAIN
-            methods.scroll_text("You Have" + values.sword_amount + "swords left!")
-            room4()
+            methods.scroll_text("You Have" + str(values.sword_amount) + " swords left!")
         case "2":
             methods.scroll_text("You back away slowly and leave the mess hall.")
-            room4()
         case _:
             methods.scroll_text("You hesitate, unsure of what to do.")
-            room4()
 
 def end1():
     methods.scroll_text("")
@@ -638,6 +631,18 @@ def game_init():
 
 if __name__ == "__main__":
     title_screen()
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

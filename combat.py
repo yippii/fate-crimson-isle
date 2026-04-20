@@ -33,16 +33,21 @@ def battle_menu():
 # Post-battle report, initiated from sword_fighting() and bow_fighting()
 def battle_ending(mode, missed):
     # Sword
+    print()
+    print(constants.blocker)
     if mode == 1:
         if not missed:
             print(f"Stamina left: {values.stamina}\nSword left: {values.sword_amount}")
+            print(constants.blocker)
             time.sleep(0.5)
         else:
             print(f"Stamina left: {values.stamina}")
+            print(constants.blocker)
             time.sleep(0.5)
     # Bow
     elif mode == 2:
         print(f"Stamina left: {values.stamina}\nArrows left: {values.arrow_amount}")
+        print(constants.blocker)
         time.sleep(0.5)
 
 
@@ -222,7 +227,14 @@ def battle_inventory():
         battle_inventory()
     elif choice == "4":
         print(constants.blocker)
-        print("You have " + str(values.keys_amount) + " keys")
+        if values.blue_key1: print("You have Blue Key 1")
+        if values.blue_key2: print("You have Blue Key 2")
+        if values.blue_key3: print("You have Blue Key 3")
+        if values.green_key1: print("You have Green Key 1")
+        if values.green_key2: print("You have Green Key 2")
+        if values.green_key3: print("You have Green Key 3")
+        if not values.blue_key1 and not values.blue_key2 and not values.blue_key3 and not values.green_key1 and not values.green_key2 and not values.green_key3:
+            print("You have no keys")
         time.sleep(0.5)
         battle_inventory()
     elif choice == "5":
@@ -230,6 +242,7 @@ def battle_inventory():
 
 # Initiated from battle_inventory_action()
 def potion():
+    methods.clear_screen()
     print(constants.blocker)
     print("You have " + str(values.potion_num) + " Stamina Potions")
 
@@ -251,7 +264,7 @@ def potion():
         else:
             print(constants.blocker)
             print("You do not have a stamina potion!")
-    elif choice == 2:
+    elif choice == "2":
         battle_inventory()
 
 # This function allows the user to flee the battle, ending it prematurely

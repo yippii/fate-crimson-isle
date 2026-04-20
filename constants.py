@@ -37,15 +37,6 @@ KILL_GOBLIN_BOW_DESC = "Kill goblin with bow (-3 stamina)"
 KILL_GOBLIN_CROSSBOW_DESC = "Kill goblin with crossbow (-4 stamina)"
 STAMINA_POTION_DESC = "Stamina potion (+25 stamina)"
 
-#keys
-blue_key1 = False
-blue_key2 = False
-blue_key3 = False
-
-green_key1 = False
-green_key2 = False
-green_key3 = False
-
 old_mapData = [
     # Outer rectangle 
     100, "r",
