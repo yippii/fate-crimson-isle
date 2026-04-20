@@ -648,7 +648,7 @@ def game_init():
     methods.scroll_text("You know where you must go.")
     time.sleep(1.5)
     methods.clear_screen()
-    time.sleep(1)
+    #time.sleep(1)
     play_music("F4T3.mp3")
 
 if __name__ == "__main__":
