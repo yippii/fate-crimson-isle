@@ -262,9 +262,11 @@ def potion():
             print("You used a stamina potion!")
             values.potion_num -= 1
             values.stamina += 25
+            battle_inventory()
         else:
             print(constants.blocker)
             print("You do not have a stamina potion!")
+            battle_inventory()
     elif choice == "2":
         battle_inventory()
 

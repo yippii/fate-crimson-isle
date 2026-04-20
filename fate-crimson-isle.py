@@ -1,10 +1,15 @@
 import time
 import turtle
+import argparse
 
 import combat
 import methods
 import constants
 import values
+
+#F4T3 (music)
+import threading
+import pygame
 
 # setup screen
 screen = turtle.Screen()
@@ -15,10 +20,6 @@ screen.setup(width=600, height=600, startx=-1, starty=0)
 screen.cv._rootwindow.attributes("-topmost", True)
 screen.cv._rootwindow.resizable(False, False)
 screen.cv._rootwindow.overrideredirect(True)
-
-#F4T3 (music)
-import threading
-import pygame
 
 # setup title
 title = turtle.Turtle()
@@ -54,11 +55,18 @@ def title_screen():
 
     screen.update()
 
+    parser = argparse.ArgumentParser(description="Fate: the crimson isle")
+    parser.add_argument("-s", "--skip", action="store_true", help="skip game" )
+
     # click to exit
     def start_game(x, y):
-        continueOnTerminal()
-        game_init()
-        room1()
+        if parser.parse_args().skip:
+            continueOnTerminal()
+            room1()
+        else:
+            continueOnTerminal()
+            game_init()
+            room1()
 
     screen.onclick(start_game)
     turtle.done()
@@ -244,11 +252,11 @@ def room1():
     match choice:
         case "1":
             methods.clear_screen()
-            hm()
+            hm(knight)
             room2(knight)
         case "2":
             methods.clear_screen()
-            armory()
+            armory(knight)
             room2(knight)
         case "3":
             methods.clear_screen()
@@ -256,16 +264,16 @@ def room1():
 
 # TODO: Update gotos
 def room2(knight):
-    knight.goto(150, 150)
+    knight.goto(110, 130)
     methods.clear_screen()
-    methods.scroll_text("You turn to a new hallway, and the first thing you see is a right door, a left door, and a door at the end, hinting at a mystery.")
+    methods.scroll_text("You turn to a new hallway, and the first thing you see is a left door, and two doors at the end, hinting at a mystery.")
 
     choice = methods.ask_fixed_bottom(
         "what will you do?",
         ["1", "2", "3"],
         [
             "you have three options",
-            "1. venture into the right door",
+            "1. venture into the left door",
             "2. explore the War Chest room",
             "3. enter the Alchemy Lab",
         ],
@@ -276,17 +284,16 @@ def room2(knight):
             closet()
             room3(knight)
         case "2":
-            warChest()
+            warChest(knight)
             room3(knight)
         case "3":
             lab()
             room3(knight)
 
-# TODO: Update gotos
 def room3(knight):
     methods.clear_screen()
-    knight.goto(140, 135)
-    methods.scroll_text("As you turn, the next hallway reveals only two doors: an archery range and a blade vault.")
+    knight.goto(110, -70)
+    methods.scroll_text("As you turn, the next hallway reveals only two doors: The Elixir Vault and a blade vault.")
 
     choice = methods.ask_fixed_bottom(
         "what will you do?",
@@ -300,7 +307,7 @@ def room3(knight):
 
     match choice:
         case "1":
-            elixirVault()
+            elixirVault(knight)
             room4(knight)
         case "2":
             bladeVault()
@@ -311,7 +318,7 @@ def room3(knight):
 
 # TODO: Update gotos
 def room4(knight):
-    knight.goto(150, 140)
+    knight.goto(-40, -145)
     methods.scroll_text("As you turn, the next hallway reveals only two doors: an archery range and a blade vault.")
 
     choice = methods.ask_fixed_bottom(
@@ -397,7 +404,8 @@ def L2room2(knight):
 
 
 #------------------------ ROOMS -------------------------------------------------------------------------------------------------------------
-def hm():
+def hm(knight):
+    knight.goto(0, 120)
     methods.clear_screen()
     methods.scroll_text("you enter into the mess hall, where you encounter Goblin eating pizza.")
 
@@ -407,7 +415,7 @@ def hm():
         [
             "you have two options",
             "1. Attack the goblin",
-            "2. Leave",
+            "2. Continue exploring",
         ],
     )
     match choice:
@@ -425,7 +433,8 @@ def hm():
     # combat.battle_menu()
     # time.sleep(2)
 
-def armory():
+def armory(knight):
+    knight.goto(-230, 25)
     methods.clear_screen()
     methods.scroll_text("You enter the Armory. You find a goblin trying on different pieces of armor.")
     
@@ -460,7 +469,8 @@ def closet():
     #Puzzle room...
     time.sleep(1.5)
 
-def warChest():
+def warChest(knight):
+    knight.goto(190, -50)
     methods.clear_screen()
     methods.scroll_text("You enter the War Chest room. You find a goblin cleaning his sword.")
     
@@ -480,9 +490,10 @@ def warChest():
             methods.scroll_text("You defeated the goblin! You found 3 swords.")
 
             values.sword_amount += constants.SWORDS_GAIN
-            methods.scroll_text("You Have" + str(values.sword_amount) + "swords left!")
+            methods.scroll_text("You Have " + str(values.sword_amount) + " swords left!")
         case "2":
-            methods.scroll_text("You back away slowly and leave the mess hall.")
+            methods.scroll_text("You backed away slowly and left the mess hall.")
+
 
 def lab():
     methods.clear_screen()
@@ -492,15 +503,17 @@ def lab():
     methods.scroll_text("You have " + str(values.potion_num) + " potions left!")
     time.sleep(1.5)
 
-def elixirVault():
+def elixirVault(knight):
+    knight.goto(190, -120)
     methods.clear_screen()
-    methods.scroll_text("As you enter the alchemy lab, you find a bunch of documents explaining how to make a stamina potion.")
+    methods.scroll_text("As you enter The Elixir Vault, you find a bunch potions lying around and you took two of them.")
     # + Potion
-    values.potion_num += 1
+    values.potion_num += 2
     methods.scroll_text("You have " + str(values.potion_num) + " potions left!")
     time.sleep(1.5)
 
-def bladeVault():
+def bladeVault(knight):
+    knight.goto(20, -50)
     methods.clear_screen()
     methods.scroll_text("You enter the blade vault room. You find a goblin cleaning his sword.")
     
@@ -601,24 +614,24 @@ def game_init():
     methods.scroll_text("\033[1;31mFate: the crimson isle\033[0;0m\n")
     time.sleep(2)
     methods.scroll_text("You are a level 1 adventurer working for King Lebron inc., tasked with exploring the mysterious island, the Crimson Isle.\n")
-    time.sleep(2)
+    time.sleep(1)
     methods.scroll_text("You land amidst the crashing waves, peering back at the approaching vessel. It carries a team of experienced adventurers, the ones that you are meant to shadow on this expedition.\n")
-    time.sleep(2)
+    time.sleep(1)
     methods.scroll_text("However, you don't want to wait for them, so you run off to start exploring.\n")
-    time.sleep(2)
+    time.sleep(1)
     methods.scroll_text("Two...")
     time.sleep(0.5)
     methods.scroll_text("Hours...")
     time.sleep(0.5)
     methods.scroll_text("Later...\n")
-    time.sleep(2)
+    time.sleep(1)
     methods.scroll_text("Returning to the shore, you reach your team's camp.\n")
-    time.sleep(2)
+    time.sleep(1)
     methods.scroll_text("You enter your boss' tent, and start to regale them with your tales of glory from the past two hours.\n")
-    time.sleep(2)
+    time.sleep(1)
     methods.scroll_text("After a few moments, you notice that they have not responded, nor have they moved from their position on the cot.\n")
-    time.sleep(2)
-    methods.scroll_text("You walk up to them, and put your hand on their shoulder...\n")
+    time.sleep(1)
+    methods.scroll_text("You walk up to them, and put your hand on their shoulder...")
     time.sleep(0.5)
     methods.scroll_text("...")
     time.sleep(1.5)
@@ -629,13 +642,30 @@ def game_init():
     methods.scroll_text("Grabbing their swords, you leave the camp to begin your journey.")
     methods.scroll_text("Looking up, you see a forbidding castle high up on a towering mountain, glowing with crimson light.")
     methods.scroll_text("You know where you must go.")
-    time.sleep(1.5)
+    time.sleep(1)
     methods.clear_screen()
     #time.sleep(1)
     play_music("F4T3.mp3")
 
 if __name__ == "__main__":
     title_screen()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

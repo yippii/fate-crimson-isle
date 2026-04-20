@@ -8,7 +8,7 @@ def scroll_text(text):
     for char in text:
         sys.stdout.write(char)
         sys.stdout.flush()
-        time.sleep(0.05)
+        time.sleep(0.03)
     print()
 
 def clear_screen():

@@ -1,8 +1,8 @@
 weapon1 = "???"
 weapon2 = "???"
 weapon3 = "???"
-max_stamina = 100
-stamina = 50
+max_stamina = 30
+stamina = 10
 sword_amount = 4
 arrow_amount = 2
 potion_num = 0
