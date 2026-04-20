@@ -254,6 +254,7 @@ def room1():
             methods.clear_screen()
             room2(knight)
 
+# TODO: Update gotos
 def room2(knight):
     knight.goto(150, 150)
     methods.clear_screen()
@@ -281,7 +282,7 @@ def room2(knight):
             lab()
             room3(knight)
 
-
+# TODO: Update gotos
 def room3(knight):
     methods.clear_screen()
     knight.goto(140, 135)
@@ -308,6 +309,7 @@ def room3(knight):
             methods.clear_screen()
             methods.scroll_text("you seek the wisdom of the king le bron james")
 
+# TODO: Update gotos
 def room4(knight):
     knight.goto(150, 140)
     methods.scroll_text("As you turn, the next hallway reveals only two doors: an archery range and a blade vault.")
@@ -368,7 +370,8 @@ def L2():
             methods.clear_screen()
             L2room2(knightL2)
 
-# TODO: Duplicated room (this is boss fight right)
+# TODO: Duplicated room (this is boss fight right?)
+# TODO: Update gotos
 def L2room2(knight):
     knight.goto(150, 140)
     methods.scroll_text("The hallway continues, and you find yourself facing a doorway before you: a room pulsing with unsettling activity, and a faint, desperate scream suggesting something terrible is happening within.")
@@ -390,7 +393,7 @@ def L2room2(knight):
             archeryRange()
             #room4(knight)
         case "2":
-            L2(knight)
+            L2()
 
 
 #------------------------ ROOMS -------------------------------------------------------------------------------------------------------------
