@@ -3,6 +3,7 @@ import methods
 import constants
 import values
 import time
+import fate_crimson_isle
 
 from fate_crimson_isle import end3
 
@@ -11,25 +12,28 @@ monster = "Goblin"
 
 # Battle main menu, called from main during enemy rooms
 def battle_menu():
-    methods.clear_screen()
-    print(constants.blocker)
-    methods.scroll_text("You stumble upon a " + monster + "!")
-    choice = methods.ask_fixed_bottom(
-        constants.wyd,
-        ["1", "2", "3"],
-        [
-            "1 - Attack",
-            "2 - Inventory",
-            "3 - Flee"
-        ]
-    )
+    if values.stamina >= 1:
+        methods.clear_screen()
+        print(constants.blocker)
+        methods.scroll_text("You stumble upon a " + monster + "!")
+        choice = methods.ask_fixed_bottom(
+            constants.wyd,
+            ["1", "2", "3"],
+            [
+                "1 - Attack",
+                "2 - Inventory",
+                "3 - Flee"
+            ]
+        )
 
-    if choice == "1":
-        battle_fight()
-    elif choice == "2":
-        battle_inventory()
-    elif choice == "3":
-        battle_flee()
+        if choice == "1":
+            battle_fight()
+        elif choice == "2":
+            battle_inventory()
+        elif choice == "3":
+            battle_flee()
+    else:
+        fate_crimson_isle.end1()
 
 
 # Post-battle report, initiated from sword_fighting(), bow_fighting() and crossbow_fighting()
