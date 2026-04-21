@@ -306,7 +306,6 @@ def room3(knight):
             "1. Explore the Elixir Vault",
             "2. Venture into the Blade vault",
             "3. Inspect the Rune Door",
-            "4. ???"
         ],
     )
 
