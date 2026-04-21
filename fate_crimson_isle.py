@@ -524,8 +524,6 @@ def closet(knight):
     methods.scroll_text("You presume that you must solve the riddle to open the chest:")
     methods.scroll_text('(You can also give up by typing, "I give up")\n')
 
-    giving_up = input("Do you want to give up?\n: ")
-
     while riddle:
         methods.scroll_text(riddle_question)
         try:
@@ -539,8 +537,6 @@ def closet(knight):
         elif riddle_guess == "I give up":
             methods.scroll_text("\nThe chest remains stagnant.\n")
             riddle = False
-    else:
-        methods.scroll_text("\nThe chest remains stagnant.\n")
 
     time.sleep(1.5)
     values.room_cleared = values.room_cleared + 1
