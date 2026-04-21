@@ -527,10 +527,7 @@ def closet(knight):
     while riddle:
         methods.clear_screen()
         methods.scroll_text(riddle_question)
-        try:
-            riddle_guess = (input("  : "))
-        except:
-            methods.scroll_text("\nThe chest remains stagnant.\n")
+        riddle_guess = (input("-> "))
         if riddle_guess == str(len(riddle_question.strip()[-13:-2])):
             methods.scroll_text("\nThe chest opens, and reveals a key.\n")
             values.blue_key2 = True
@@ -538,6 +535,8 @@ def closet(knight):
         elif riddle_guess == "I give up":
             methods.scroll_text("\nThe chest remains stagnant.\n")
             riddle = False
+        else:
+            methods.scroll_text("Wrong answer.\n")
 
     time.sleep(1.5)
     values.room_cleared = values.room_cleared + 1
