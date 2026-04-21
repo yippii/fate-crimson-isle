@@ -302,7 +302,7 @@ def room3(knight):
         "what will you do?",
         ["1", "2", "3", "le bron"],
         [
-            "You have two options",
+            "You have three options",
             "1. Explore the Elixir Vault",
             "2. Venture into the Blade vault",
             "3. Inspect the Rune Door",
