@@ -118,7 +118,7 @@ def drawMapL1():
 +----+    +---------+      |      +-------+
 |         |         |      |      |       |
 |         |         |      |      |       |
-|    |    |         |      |      +-------+
+|    |    |         |             +-------+
 +----+----+  --------------+      |       |
 |                                         |
 |                                         |
@@ -300,11 +300,12 @@ def room3(knight):
 
     choice = methods.ask_fixed_bottom(
         "what will you do?",
-        ["1", "2", "le bron"],
+        ["1", "2", "3", "le bron"],
         [
             "You have two options",
             "1. Explore the Elixir Vault",
             "2. Venture into the Blade vault",
+            "3. Inspect the Rune Door",
             "3. ???"
         ],
     )
@@ -315,6 +316,9 @@ def room3(knight):
             room4(knight)
         case "2":
             bladeVault(knight)
+            room4(knight)
+        case "3":
+            runeRoom(knight)
             room4(knight)
         case "le bron":
             methods.clear_screen()
@@ -617,6 +621,73 @@ def bladeVault(knight):
         case "2":
             methods.scroll_text("You back away slowly and leave the blade vault.")
 
+def runeRoom(knight):
+    knight.goto(110, -120)
+    methods.clear_screen()
+    methods.scroll_text("You press your hand against the rune door. It groans open, revealing a dim chamber.")
+    time.sleep(1)
+    methods.scroll_text("In the centre of the room stands a stone pedestal. On it, four symbols are carved:")
+    time.sleep(1)
+    methods.scroll_text("  MOON   —   SUN   —   STAR   —   VOID")
+    time.sleep(1)
+    methods.scroll_text("Below them, an inscription reads:")
+    time.sleep(1)
+    methods.scroll_text("'I have cities, but no houses live there.")
+    time.sleep(0.5)
+    methods.scroll_text(" I have mountains, but no trees grow there.")
+    time.sleep(0.5)
+    methods.scroll_text(" I have water, but no fish swim there.")
+    time.sleep(0.5)
+    methods.scroll_text(" I have roads, but no one travels them.'")
+    time.sleep(1.5)
+    methods.scroll_text("You must press one of the four symbols to unseal the chest behind the pedestal.")
+    methods.scroll_text('(Type your answer, or "I give up" to leave empty-handed)\n')
+
+    solved = False
+    attempts = 0
+    max_attempts = 3
+
+    while not solved and attempts < max_attempts:
+        methods.scroll_text("MOON  /  SUN  /  STAR  /  VOID")
+        guess = input("-> ").strip().upper()
+
+        if guess == "I GIVE UP":
+            methods.scroll_text("\nYou back away from the pedestal. The runes dim. The chest stays sealed.")
+            time.sleep(1)
+            break
+        elif guess in ["MAP", "A MAP"]:
+            methods.scroll_text("\nThe pedestal shudders. The chest flies open.")
+            time.sleep(1)
+            methods.scroll_text("Inside: a vial of shimmering liquid and a torn journal page.")
+            time.sleep(1)
+            methods.scroll_text("The journal reads: 'The Necromancer fears only one thing — his own name spoken aloud.'")
+            time.sleep(1)
+            values.potion_num += 2
+            methods.scroll_text("You gained 2 stamina potions!")
+            methods.scroll_text("You have " + str(values.potion_num) + " potions left!")
+            values.room_cleared += 1
+            solved = True
+        elif guess in ["MOON", "SUN", "STAR", "VOID"]:
+            attempts += 1
+            methods.scroll_text("\nThe runes flash red. A surge of energy knocks you back.")
+            time.sleep(1)
+            if attempts < max_attempts:
+                methods.scroll_text("Wrong symbol. Attempts remaining: " + str(max_attempts - attempts))
+            else:
+                methods.scroll_text("The chamber locks. You've exhausted the pedestal's patience.")
+                time.sleep(1)
+                methods.scroll_text("You leave with nothing but singed fingertips.")
+                time.sleep(1)
+        else:
+            attempts += 1
+            methods.scroll_text("\nNothing happens. The symbols stare back at you.")
+            if attempts < max_attempts:
+                methods.scroll_text("Attempts remaining: " + str(max_attempts - attempts))
+            else:
+                methods.scroll_text("The runes go dark. The room seals itself. You leave empty-handed.")
+                time.sleep(1)
+
+    time.sleep(1.5)
 
 def archeryRange(knight):
     knight.goto(-80, -55)
