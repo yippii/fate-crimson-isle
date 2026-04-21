@@ -306,7 +306,7 @@ def room3(knight):
             "1. Explore the Elixir Vault",
             "2. Venture into the Blade vault",
             "3. Inspect the Rune Door",
-            "3. ???"
+            "4. ???"
         ],
     )
 
@@ -752,11 +752,9 @@ def journal_entry():
     time.sleep(1)
     methods.scroll_text("'If you are reading this, I did not make it.'")
     time.sleep(1)
-    methods.scroll_text("'The Necromancer fears only one thing — his own name spoken aloud.'")
+    methods.scroll_text("'The Necromancer fears only one thing, a bolt through the heart. Steel alone cannot kill him. It must be launched.'")
     time.sleep(1)
-    methods.scroll_text("'His name is... is...'")
-    time.sleep(1.5)
-    methods.scroll_text("The rest of the page is burned away.")
+    methods.scroll_text("'Find a crossbow. It is the only way.'")
     time.sleep(1)
     methods.scroll_text("You close the journal slowly.")
     time.sleep(2)
