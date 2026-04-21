@@ -523,9 +523,28 @@ def armory(knight):
 def closet(knight):
     knight.goto(110, 200)
     methods.clear_screen()
-    methods.scroll_text("...")
-    methods.scroll_text("The room is empty, you decided to continue on your journey.")
-    #Puzzle room...
+    riddle_question = " How many letters are in the alphabet?"
+    riddle = True
+
+    methods.scroll_text("You find a locked chest with a riddle on it.")
+    methods.scroll_text("You presume that you must solve the riddle to open the chest:")
+    methods.scroll_text('(You can also give up by typing, "I give up")\n')
+
+    while riddle:
+        methods.scroll_text(riddle_question)
+        try:
+            riddle_guess = int(input("  : "))
+        except:
+            methods.scroll_text("\nThe chest remains stagnant.\n")
+        if riddle_guess == len(riddle_question.strip()[-13:-2]):
+            methods.scroll_text("\nThe chest opens, and reveals a key.\n")
+            values.blue_key2 = True
+            riddle = False
+        elif riddle_guess == "I give up":
+            riddle = False
+    else:
+        methods.scroll_text("\nThe chest remains stagnant.\n")
+
     time.sleep(1.5)
     values.room_cleared = values.room_cleared + 1
 

@@ -269,11 +269,7 @@ def battle_inventory():
         print(constants.blocker)
         if values.blue_key1: print("You have Blue Key 1")
         if values.blue_key2: print("You have Blue Key 2")
-        if values.blue_key3: print("You have Blue Key 3")
-        if values.green_key1: print("You have Green Key 1")
-        if values.green_key2: print("You have Green Key 2")
-        if values.green_key3: print("You have Green Key 3")
-        if not values.blue_key1 and not values.blue_key2 and not values.blue_key3 and not values.green_key1 and not values.green_key2 and not values.green_key3:
+        if not values.blue_key1 and not values.blue_key2:
             print("You have no keys")
         time.sleep(0.5)
         battle_inventory()
