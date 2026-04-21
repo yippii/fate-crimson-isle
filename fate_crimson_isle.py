@@ -444,7 +444,7 @@ def boss_fight(knight):
 #------------------------ ROOMS -------------------------------------------------------------------------------------------------------------
 
 def mh(knight):
-    knight.goto(0, 110)
+    knight.goto(0, 80)
     methods.clear_screen()
     methods.scroll_text("You enter into the mess hall, where you encounter a Goblin eating raw fish.")
 
@@ -517,7 +517,7 @@ def armory(knight):
 def closet(knight):
     knight.goto(110, 200)
     methods.clear_screen()
-    riddle_question = "How many letters are in the alphabet?"
+    riddle_question = " How many letters are in the alphabet?"
     riddle = True
 
     methods.scroll_text("You find a locked chest with a riddle on it.")
@@ -528,22 +528,16 @@ def closet(knight):
         methods.clear_screen()
         methods.scroll_text(riddle_question)
         try:
-            riddle_guess = input("  : ")
+            riddle_guess = (input("  : "))
+        except:
             methods.scroll_text("\nThe chest remains stagnant.\n")
-            if riddle_guess == len(riddle_question.strip()[-13:-2]):
-                methods.scroll_text("\nThe chest opens, and reveals a key.\n")
-                values.blue_key2 = True
-                riddle = False
-            elif riddle_guess == "I give up":
-                riddle = False
-            else:
-                raise ValueError
-        except ValueError:
-            methods.scroll_text("\nWrong answer.\n")
-            time.sleep(1)
-
-    else:
-        methods.scroll_text("\nThe chest remains stagnant.\n")
+        if riddle_guess == str(len(riddle_question.strip()[-13:-2])):
+            methods.scroll_text("\nThe chest opens, and reveals a key.\n")
+            values.blue_key2 = True
+            riddle = False
+        elif riddle_guess == "I give up":
+            methods.scroll_text("\nThe chest remains stagnant.\n")
+            riddle = False
 
     time.sleep(1.5)
     values.room_cleared = values.room_cleared + 1
