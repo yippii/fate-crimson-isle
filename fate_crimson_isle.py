@@ -524,6 +524,10 @@ def closet(knight):
     methods.scroll_text("You presume that you must solve the riddle to open the chest:")
     methods.scroll_text('(You can also give up by typing, "I give up")\n')
 
+    giving_up = input("Do you want to give up?\n: ")
+    if giving_up == "I give up":
+        riddle = False 
+
     while riddle:
         methods.scroll_text(riddle_question)
         try:
@@ -533,8 +537,6 @@ def closet(knight):
         if riddle_guess == len(riddle_question.strip()[-13:-2]):
             methods.scroll_text("\nThe chest opens, and reveals a key.\n")
             values.blue_key2 = True
-            riddle = False
-        elif riddle_guess == "I give up":
             riddle = False
     else:
         methods.scroll_text("\nThe chest remains stagnant.\n")
