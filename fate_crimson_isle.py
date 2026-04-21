@@ -259,9 +259,8 @@ def room1():
             methods.clear_screen()
             room2(knight)
 
-# TODO: Update gotos
 def room2(knight):
-    knight.goto(-110, 130)
+    knight.goto(110, 130)
     methods.clear_screen()
     methods.scroll_text("You turn to a new hallway. The first thing you see is a door on your left, and then two doors at the end, hinting at a mystery.")
 
@@ -278,13 +277,13 @@ def room2(knight):
 
     match choice:
         case "1":
-            closet()
+            closet(knight)
             room3(knight)
         case "2":
             warChest(knight)
             room3(knight)
         case "3":
-            lab()
+            lab(knight)
             room3(knight)
 
 def room3(knight):
@@ -294,11 +293,12 @@ def room3(knight):
 
     choice = methods.ask_fixed_bottom(
         "what will you do?",
-        ["1", "2"],
+        ["1", "2", "le bron"],
         [
             "You have two options",
             "1. Explore the Elixir Vault",
             "2. Venture into the Blade vault",
+            "3. ???"
         ],
     )
 
@@ -315,7 +315,6 @@ def room3(knight):
             endLEBRON()
             
 
-# TODO: Update gotos
 def room4(knight):
     knight.goto(-40, -145)
     methods.scroll_text("As you turn, the next hallway reveals only two doors: an Archery Range and a staircase delving deeper into the castle.")
@@ -375,8 +374,6 @@ def L2():
             methods.clear_screen()
             L2room2(knightL2)
 
-# TODO: Update gotos
-
 def L2room2(knight):
     knight.goto(-130, 167)
     methods.scroll_text("The hallway continues, and you find yourself facing a doorway before you: a room pulsing with unsettling activity, and a faint, desperate scream suggesting something terrible is happening within.")
@@ -403,15 +400,15 @@ def boss_fight(knight):
     methods.scroll_text("Let the games begin")
     methods.scroll_text("HAHAHAHA")
 
-    if(values.kingsHoard_ROOM == False):
+    if not values.kingsHoard_ROOM:
         win1()
-    elif(values.kingsHoard_ROOM == True):
+    else:
         end2()
 
 #------------------------ ROOMS -------------------------------------------------------------------------------------------------------------
 
 def hm(knight):
-    knight.goto(0, 90)
+    knight.goto(0, 110)
     methods.clear_screen()
     methods.scroll_text("You enter into the mess hall, where you encounter a Goblin eating pizza.")
 
@@ -467,9 +464,10 @@ def armory(knight):
             methods.scroll_text("You back away slowly and leave the armory.")
 
 def closet(knight):
-    knight.goto(190, -50)
+    knight.goto(110, 200)
     methods.clear_screen()
-    methods.scroll_text(".")
+    methods.scroll_text("...")
+    methods.scroll_text("The room is empty, you decided to continue on your journey.")
     #Puzzle room...
     time.sleep(1.5)
     values.room_cleared = values.room_cleared + 1
@@ -502,7 +500,8 @@ def warChest(knight):
             methods.scroll_text("You backed away slowly and left the war chest room.")
 
 
-def lab():
+def lab(knight):
+    knight.goto(30, 160)
     methods.clear_screen()
     methods.scroll_text("As you enter the alchemy lab, you find a bunch of documents explaining how to make a stamina potion.")
     # + Potion
@@ -628,7 +627,7 @@ def kingsHoard(knight):
     values.have_crossbow = True
     values.arrow_amount = values.arrow_amount + 2 * constants.ARROW_GAIN
     values.room_cleared = values.room_cleared + 1
-    kingsHoard_ROOM = True
+    values.kingsHoard_ROOM = True
     boss_fight(knight)
 
 #------------------------------------- ENDINGS ----------------------------------------------------------------------------------------
@@ -654,6 +653,7 @@ def end1():
     methods.scroll_text("Rooms cleared: " + str(values.room_cleared) + " — So close, yet so far.")
     time.sleep(1)
     methods.scroll_text("GAME OVER. The Crimson Isle claims another soul.")
+    input("Press enter to end...")
     sys.exit()
 
 
@@ -671,6 +671,7 @@ def end2():
         time.sleep(1)
 
     methods.scroll_text("GAME OVER. You were the right warrior. Just the wrong moment.")
+    input("Press any key to end...")
     sys.exit()
 
 def end3():
@@ -685,6 +686,7 @@ def end3():
         time.sleep(1)
 
     methods.scroll_text("GAME OVER. You were the right warrior. Just the wrong moment.")
+    input("Press enter to end...")
     sys.exit()
 
 
@@ -706,24 +708,27 @@ def endLEBRON():
     methods.scroll_text("He stands, extends his hand, and offers you a contract.")
     time.sleep(1)
 
-    if values.room_cleared >= 8:
-        methods.scroll_text("'You cleared " + str(values.room_cleared) + " rooms. You're hired. Welcome to the inner circle.'")
+    if values.room_cleared >= 2:
+        methods.scroll_text("'You fought your way through. You're hired. Welcome to the inner circle.'")
         time.sleep(1)
         methods.scroll_text("ENDING: THE LEBRON CHRONICLES. You are now employee of the month.")
+        input("Press enter to end...")
+        sys.exit()
     else:
         methods.scroll_text("'Only " + str(values.room_cleared) + " rooms? You're on probation.'")
         time.sleep(1)
         methods.scroll_text("ENDING: THE LEBRON CHRONICLES. You get a participation trophy and a mediocre benefits package.")
+        input("Press enter to end...")
         sys.exit()
 
 
 def win1():
-    # methods.scroll_text("You enter the final chamber.")
-    # time.sleep(1)
-    # methods.scroll_text("The Necromancer towers before you, wreathed in crimson flame.")
-    # time.sleep(1)
-    # methods.scroll_text("'You made it this far. Impressive. But it ends HERE.'")
-    # time.sleep(1.5)
+    methods.scroll_text("You enter the final chamber.")
+    time.sleep(1)
+    methods.scroll_text("The Necromancer towers before you, wreathed in crimson flame.")
+    time.sleep(1)
+    methods.scroll_text("'You made it this far. Impressive. But it ends HERE.'")
+    time.sleep(1.5)
 
     if values.room_cleared >= 8:
         methods.scroll_text("But you are not the same adventurer who stepped off that boat.")
@@ -756,7 +761,7 @@ def win1():
     time.sleep(1)
     methods.scroll_text("The castle shudders. Then silence.")
     time.sleep(1.5)
-    methods.scroll_text("You walk out into the cold morning air.")
+    methods.scroll_text("You walk out into the cold morning breeze.")
     time.sleep(1)
     methods.scroll_text("The Crimson Isle is free.")
     time.sleep(1)
@@ -768,6 +773,7 @@ def win1():
     methods.scroll_text("Swords: " + str(values.sword_amount) + "  |  Arrows: " + str(values.arrow_amount) + "  |  Rooms cleared: " + str(values.room_cleared))
     time.sleep(1)
     methods.scroll_text("YOU WIN. The legend of the Crimson Isle will be told for generations.")
+    input("Press enter to end...")
     sys.exit()
 
 #-------------------------------------GAME START----------------------------------------------------------------------------------------
