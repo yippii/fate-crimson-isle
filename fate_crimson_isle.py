@@ -727,12 +727,6 @@ def endLEBRON():
 
 
 def win1():
-    methods.scroll_text("You enter the final chamber.")
-    time.sleep(1)
-    methods.scroll_text("The Necromancer towers before you, wreathed in crimson flame.")
-    time.sleep(1)
-    methods.scroll_text("'You made it this far. Impressive. But it ends HERE.'")
-    time.sleep(1.5)
 
     if values.room_cleared >= 8:
         methods.scroll_text("But you are not the same adventurer who stepped off that boat.")
