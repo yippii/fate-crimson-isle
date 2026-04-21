@@ -67,9 +67,7 @@ Explore dangerous rooms, battle enemies, solve puzzles, and manage your stamina 
 
 ## 🚀 Installation & Usage
 
-### Requirements
-- Python 3.8+
-
 ### Run the game
-```bash
-python main.py
+- Go to GitHub Actions on the repository and select the latest commit
+- Download the game executable for the respective operating system
+- Double click the file to execute the game
