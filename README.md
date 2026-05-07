@@ -1,4 +1,4 @@
-# Fate: Crimson Isle
+# ✧F A T E✧: 𝕮𝖗𝖎𝖒𝖘𝖔𝖓 𝕴𝖘𝖑𝖊
 
 A terminal-based **roguelike dungeon crawler** set in a dark medieval world.  
 Explore dangerous rooms, battle enemies, solve puzzles, and manage your stamina wisely — because **if you die, your progress is gone**.
